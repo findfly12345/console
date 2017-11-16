@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.AgentCustMapper" >
+    <!--<resultMap id="CimagentListVoMap" type="com.dal.vo.agt.CimagentListVo">-->
+        <!--<result column="MEMBER_ID" property="memberId" />-->
+        <!--<result column="AGENT_SHORT_NAME" property="agentShortName" />-->
+        <!--<result column="AGENT_LEVEL" property="agentLevel" />-->
+        <!--<result column="MEMBER_STAT" property="memberStat" />-->
+        <!--<result column="UP_AGENT_ID" property="upAgentId" />-->
+    <!--</resultMap>-->
+    <resultMap id="AgentDetailBOMap" type="com.allcheer.bpos.domain.AgentDetailInfoBO">
+        <result column="MEMBER_ID" property="memberId" />
+        <result column="OPDATE" property="opdate" />
+        <result column="AGENT_NAME" property="agentName" />
+        <result column="AGENT_SHORT_NAME" property="agentShortName" />
+        <result column="REG_NAME" property="regName" />
+        <result column="REG_CODE" property="regCode" />
+        <result column="TAX_CODE" property="taxCode" />
+        <result column="REG_ADDR" property="regAddr" />
+        <result column="LIC_TYPE" property="licType" />
+        <result column="LIC_AMT" property="licAmt" />
+        <result column="LEGAL_NAME" property="legalName" />
+        <result column="IDNO" property="idno" />
+        <result column="CONTACT_NAME" property="contactName" />
+        <result column="CONTACT_MOBILE" property="contactMobile" />
+        <result column="CONTACT_ADDR" property="contactAddr" />
+        <result column="EMAIL" property="email" />
+        <result column="AGENT_STATUS" property="memberStat" />
+        <result column="MEMBER_STAT" property="agentLevel" />
+        <result column="MEMBER_STAT" property="upAgentId" />
+        <result column="MEMBER_STAT" property="oemId" />
+        <result column="MEMBER_STAT" property="tellerId" />
+    </resultMap>
+
+    <!--<select id="selectCimagentListVo" resultMap="CimagentListVoMap" parameterType="Map">-->
+        <!--SELECT V.* FROM (select T.* , ROWNUM RM FROM (-->
+        <!--select a.member_id, a.agent_short_name, a.bagent_id, b.agent_level, d.member_stat, c.bagent_short_name, a.agent_id-->
+        <!--from cimagent a, cimamap b, cimbagent c, cimemb d-->
+        <!--where a.member_id=b.member_id and a.bagentselectCimagentListVo_id=c.member_id and a.member_id=d.member_id-->
+        <!--<if test="bagentId != null and bagentId != ''" >-->
+            <!--and a.bagent_id=#{bagentId, jdbcType=CHAR}-->
+        <!--</if>-->
+        <!--<if test="agentShortName != null and agentShortName != ''" >-->
+            <!--and a.agent_short_name  like '%'||#{agentShortName}||'%'-->
+        <!--</if>-->
+        <!--<if test="memberId != null and memberId != ''" >-->
+            <!--and a.member_id=#{memberId, jdbcType=CHAR}-->
+        <!--</if>-->
+        <!--<if test="agentLevel != null and agentLevel != ''" >-->
+            <!--and b.agent_level=#{agentLevel, jdbcType=CHAR}-->
+        <!--</if>-->
+        <!--<if test="memberStat != null and memberStat != ''" >-->
+            <!--and d.member_stat=#{memberStat, jdbcType=CHAR}-->
+        <!--</if>-->
+        <!--<if test="oemId != null and oemId != ''" >-->
+            <!--and a.oem_id=#{oemId, jdbcType=CHAR}-->
+        <!--</if>-->
+        <!--<if test="bagentIdFlag != null and bagentIdFlag != ''" >-->
+            <!--and a.bagent_id=#{bagentIdFlag, jdbcType=CHAR} and b.agent_level='1'-->
+        <!--</if>-->
+        <!--<if test="agentId != null and agentId != ''" >-->
+            <!--and a.agent_id=#{agentId, jdbcType=CHAR}-->
+        <!--</if>-->
+        <!--<if test="flag != null and flag != ''" >-->
+            <!--and a.agent_id != a.member_id-->
+        <!--</if>-->
+        <!--ORDER BY ${orderByStr} desc) T-->
+        <!--WHERE <![CDATA[ROWNUM <= #{endIdx}]]>) V WHERE <![CDATA[RM >= #{startIdx}]]>-->
+    <!--</select>-->
+
+    <!--<select id="countCimagentListVo" resultType="java.lang.Integer" parameterType="Map">-->
+        <!--select count(1)-->
+        <!--from cimagent a, cimamap b, cimbagent c, cimemb d-->
+        <!--where a.member_id=b.member_id and a.bagent_id=c.member_id and a.member_id=d.member_id-->
+        <!--<if test="bagentId != null and bagentId != ''" >-->
+            <!--and a.bagent_id=#{bagentId, jdbcType=CHAR}-->
+        <!--</if>-->
+        <!--<if test="agentShortName != null and agentShortName != ''" >-->
+            <!--and a.agent_short_name like '%'||#{agentShortName}||'%'-->
+        <!--</if>-->
+        <!--<if test="memberId != null and memberId != ''" >-->
+            <!--and a.member_id=#{memberId, jdbcType=CHAR}-->
+        <!--</if>-->
+        <!--<if test="agentLevel != null and agentLevel != ''" >-->
+            <!--and b.agent_level=#{agentLevel, jdbcType=CHAR}-->
+        <!--</if>-->
+        <!--<if test="memberStat != null and memberStat != ''" >-->
+            <!--and d.member_stat=#{memberStat, jdbcType=CHAR}-->
+        <!--</if>-->
+        <!--<if test="oemId != null and oemId != ''" >-->
+            <!--and a.oem_id=#{oemId, jdbcType=CHAR}-->
+        <!--</if>-->
+        <!--<if test="bagentIdFlag != null and bagentIdFlag != ''" >-->
+            <!--and a.bagent_id=#{bagentIdFlag, jdbcType=CHAR} and b.agent_level='1'-->
+        <!--</if>-->
+        <!--<if test="agentId != null and agentId != ''" >-->
+            <!--and a.agent_id=#{agentId, jdbcType=CHAR}-->
+        <!--</if>-->
+        <!--<if test="flag != null and flag != ''" >-->
+            <!--and a.agent_id != a.member_id-->
+        <!--</if>-->
+    <!--</select>-->
+
+    <select id="selectAgentDetailInfoBO" resultMap="AgentDetailBOMap" parameterType="String">
+        select a.member_id, a.rec_cret_dttm, a.agent_name, a.agent_short_name, a.reg_name, a.reg_code, a.tax_code, a.reg_addr, a.lic_type, a.lic_amt, a.legal_name, a.idno, a.contact_name, a.contact_mobile, a.contact_addr, a.email, a.agent_status
+        from TBL_AGENT_INFO a
+        where  a.member_id=#{memberId}
+    </select>
+
+    <!--<select id="countCimagentByRegCode" resultType="java.lang.Integer" parameterType="java.lang.String">-->
+        <!--select count(1) from cimagent where reg_code=#{regCode, jdbcType=CHAR}-->
+    <!--</select>-->
+</mapper>

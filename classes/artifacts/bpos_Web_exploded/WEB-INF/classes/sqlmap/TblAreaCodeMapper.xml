@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblAreaCodeMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblAreaCode" >
+    <result column="AREA_CODE" property="areaCode" jdbcType="VARCHAR" />
+    <result column="AREA_NAME" property="areaName" jdbcType="VARCHAR" />
+    <result column="UP_AREA_CODE" property="upAreaCode" jdbcType="VARCHAR" />
+    <result column="AREA_TYPE" property="areaType" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    AREA_CODE, AREA_NAME, UP_AREA_CODE, AREA_TYPE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.TblAreaCodeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_AREA_CODE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblAreaCodeExample" >
+    delete from TBL_AREA_CODE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.TblAreaCode" >
+    insert into TBL_AREA_CODE (AREA_CODE, AREA_NAME, UP_AREA_CODE, 
+      AREA_TYPE)
+    values (#{areaCode,jdbcType=VARCHAR}, #{areaName,jdbcType=VARCHAR}, #{upAreaCode,jdbcType=VARCHAR}, 
+      #{areaType,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblAreaCode" >
+    insert into TBL_AREA_CODE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="areaCode != null" >
+        AREA_CODE,
+      </if>
+      <if test="areaName != null" >
+        AREA_NAME,
+      </if>
+      <if test="upAreaCode != null" >
+        UP_AREA_CODE,
+      </if>
+      <if test="areaType != null" >
+        AREA_TYPE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="areaCode != null" >
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaName != null" >
+        #{areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="upAreaCode != null" >
+        #{upAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="areaType != null" >
+        #{areaType,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.TblAreaCodeExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_AREA_CODE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_AREA_CODE
+    <set >
+      <if test="record.areaCode != null" >
+        AREA_CODE = #{record.areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaName != null" >
+        AREA_NAME = #{record.areaName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.upAreaCode != null" >
+        UP_AREA_CODE = #{record.upAreaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.areaType != null" >
+        AREA_TYPE = #{record.areaType,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_AREA_CODE
+    set AREA_CODE = #{record.areaCode,jdbcType=VARCHAR},
+      AREA_NAME = #{record.areaName,jdbcType=VARCHAR},
+      UP_AREA_CODE = #{record.upAreaCode,jdbcType=VARCHAR},
+      AREA_TYPE = #{record.areaType,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

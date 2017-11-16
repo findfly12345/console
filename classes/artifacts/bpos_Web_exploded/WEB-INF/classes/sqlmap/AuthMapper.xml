@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.allcheer.bpos.mapper.AuthMapper">
+
+	<resultMap type="com.allcheer.bpos.entity.dao.AuthDo" id="auth">
+		<id property="id" column="id" javaType="java.lang.Long" jdbcType="INTEGER" />
+		<result property="name" column="name" javaType="java.lang.String"
+			jdbcType="VARCHAR" />
+		<result property="value" column="value" javaType="java.lang.String"
+			jdbcType="VARCHAR" />	
+		<result property="status" column="status" javaType="java.lang.Character"
+			jdbcType="CHAR" />
+	</resultMap>
+
+	<insert id="addAuth" parameterType="com.allcheer.bpos.entity.dao.AuthDo">
+		insert into
+		bpos_auth(name,value)
+		values(#{name},#{value})
+	</insert>
+
+	<update id="updateAuth" parameterType="com.allcheer.bpos.entity.dao.AuthDo">
+		update bpos_auth
+		<set>
+			<if test="name != null">name = #{name},</if>
+			<if test="status != null">status = #{status},</if>
+			<if test="value != null">value = #{value},</if>
+		</set>
+		where id = #{id}
+	</update>
+
+	<sql id="authFiled">
+		id
+		,name
+		,status
+		,value
+	</sql>
+
+	<select id="findAuthByName" parameterType="java.lang.String"
+		resultMap="auth">
+		select
+		<include refid="authFiled"></include>
+		from bpos_auth
+		where name = #{name}
+	</select>
+
+</mapper> 

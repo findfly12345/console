@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblRiskTimeInfMapper">
+	<resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblRiskTimeInf">
+		<result column="RISK_SEQ" property="riskSeq" jdbcType="VARCHAR" />
+		<result column="RISK_TYPE" property="riskType" jdbcType="VARCHAR" />
+		<result column="RISK_DETAIL" property="riskDetail" jdbcType="VARCHAR" />
+		<result column="BEGIN_TIME" property="beginTime" jdbcType="VARCHAR" />
+		<result column="END_TIME" property="endTime" jdbcType="VARCHAR" />
+		<result column="STAT" property="stat" jdbcType="VARCHAR" />
+		<result column="RISK_REMARK" property="riskRemark" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		RISK_SEQ, RISK_TYPE, RISK_DETAIL, BEGIN_TIME, END_TIME, STAT, RISK_REMARK
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.allcheer.bpos.entity.TblRiskTimeInfExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from TBL_RISK_TIME_INF
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblRiskTimeInfExample">
+		delete from TBL_RISK_TIME_INF
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.allcheer.bpos.entity.TblRiskTimeInf">
+		insert into TBL_RISK_TIME_INF (RISK_SEQ, RISK_TYPE, RISK_DETAIL,
+		BEGIN_TIME, END_TIME, STAT,
+		RISK_REMARK)
+		values (#{riskSeq,jdbcType=VARCHAR}, #{riskType,jdbcType=VARCHAR},
+		#{riskDetail,jdbcType=VARCHAR},
+		#{beginTime,jdbcType=VARCHAR}, #{endTime,jdbcType=VARCHAR}, #{stat,jdbcType=VARCHAR},
+		#{riskRemark,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblRiskTimeInf">
+		insert into TBL_RISK_TIME_INF
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="riskSeq != null">
+				RISK_SEQ,
+			</if>
+			<if test="riskType != null">
+				RISK_TYPE,
+			</if>
+			<if test="riskDetail != null">
+				RISK_DETAIL,
+			</if>
+			<if test="beginTime != null">
+				BEGIN_TIME,
+			</if>
+			<if test="endTime != null">
+				END_TIME,
+			</if>
+			<if test="stat != null">
+				STAT,
+			</if>
+			<if test="riskRemark != null">
+				RISK_REMARK,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="riskSeq != null">
+				#{riskSeq,jdbcType=VARCHAR},
+			</if>
+			<if test="riskType != null">
+				#{riskType,jdbcType=VARCHAR},
+			</if>
+			<if test="riskDetail != null">
+				#{riskDetail,jdbcType=VARCHAR},
+			</if>
+			<if test="beginTime != null">
+				#{beginTime,jdbcType=VARCHAR},
+			</if>
+			<if test="endTime != null">
+				#{endTime,jdbcType=VARCHAR},
+			</if>
+			<if test="stat != null">
+				#{stat,jdbcType=VARCHAR},
+			</if>
+			<if test="riskRemark != null">
+				#{riskRemark,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.allcheer.bpos.entity.TblRiskTimeInfExample"
+		resultType="java.lang.Integer">
+		select count(*) from TBL_RISK_TIME_INF
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update TBL_RISK_TIME_INF
+		<set>
+			<if test="record.riskSeq != null">
+				RISK_SEQ = #{record.riskSeq,jdbcType=VARCHAR},
+			</if>
+			<if test="record.riskType != null">
+				RISK_TYPE = #{record.riskType,jdbcType=VARCHAR},
+			</if>
+			<if test="record.riskDetail != null">
+				RISK_DETAIL = #{record.riskDetail,jdbcType=VARCHAR},
+			</if>
+			<if test="record.beginTime != null">
+				BEGIN_TIME = #{record.beginTime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.endTime != null">
+				END_TIME = #{record.endTime,jdbcType=VARCHAR},
+			</if>
+			<if test="record.stat != null">
+				STAT = #{record.stat,jdbcType=VARCHAR},
+			</if>
+			<if test="record.riskRemark != null">
+				RISK_REMARK = #{record.riskRemark,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update TBL_RISK_TIME_INF
+		set RISK_SEQ = #{record.riskSeq,jdbcType=VARCHAR},
+		RISK_TYPE = #{record.riskType,jdbcType=VARCHAR},
+		RISK_DETAIL = #{record.riskDetail,jdbcType=VARCHAR},
+		BEGIN_TIME = #{record.beginTime,jdbcType=VARCHAR},
+		END_TIME = #{record.endTime,jdbcType=VARCHAR},
+		STAT = #{record.stat,jdbcType=VARCHAR},
+		RISK_REMARK = #{record.riskRemark,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+
+	<select id="countByCust" resultType="java.lang.Integer">
+
+		select
+		count(*)
+		from TBL_RISK_TIME_INF
+		WHERE 1=1
+		<if test="riskSeq != null">
+			AND risk_seq=#{riskSeq,jdbcType=VARCHAR}
+		</if>
+		<if test="riskType != null">
+			AND risk_type=#{riskType,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<select id="selectByCust" resultMap="BaseResultMap">
+		select *
+		from TBL_RISK_TIME_INF
+		WHERE 1=1
+		<if test="riskSeq != null">
+			AND risk_seq=#{riskSeq,jdbcType=VARCHAR}
+		</if>
+		<if test="riskType != null">
+			AND risk_type=#{riskType,jdbcType=VARCHAR}
+		</if>
+	</select>
+</mapper>

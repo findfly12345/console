@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblInstProfitInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblInstProfitInfo" >
+    <result column="INST_ID" property="instId" jdbcType="VARCHAR" />
+    <result column="TRANS_DATE" property="transDate" jdbcType="CHAR" />
+    <result column="TRANS_TYPE" property="transType" jdbcType="VARCHAR" />
+    <result column="TRANS_SUM" property="transSum" jdbcType="VARCHAR" />
+    <result column="MER_TRANS_FEE" property="merTransFee" jdbcType="VARCHAR" />
+    <result column="INST_TRANS_FEE" property="instTransFee" jdbcType="VARCHAR" />
+    <result column="AMT_SUM" property="amtSum" jdbcType="VARCHAR" />
+    <result column="INST_NAME" property="instName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    P.INST_ID, P.TRANS_DATE, P.TRANS_TYPE, P.TRANS_SUM, P.MER_TRANS_FEE, P.INST_TRANS_FEE, P.AMT_SUM,I.INST_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.TblInstProfitInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_INST_PROFIT_INFO P LEFT  JOIN  TBL_BTS_INST I
+    on P.INST_ID = I.INST_CODE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblInstProfitInfoExample" >
+    delete from TBL_INST_PROFIT_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.TblInstProfitInfo" >
+    insert into TBL_INST_PROFIT_INFO (INST_ID, TRANS_DATE, TRANS_TYPE, 
+      TRANS_SUM, MER_TRANS_FEE, INST_TRANS_FEE, 
+      AMT_SUM)
+    values (#{instId,jdbcType=VARCHAR}, #{transDate,jdbcType=CHAR}, #{transType,jdbcType=VARCHAR}, 
+      #{transSum,jdbcType=VARCHAR}, #{merTransFee,jdbcType=VARCHAR}, #{instTransFee,jdbcType=VARCHAR}, 
+      #{amtSum,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblInstProfitInfo" >
+    insert into TBL_INST_PROFIT_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="instId != null" >
+        INST_ID,
+      </if>
+      <if test="transDate != null" >
+        TRANS_DATE,
+      </if>
+      <if test="transType != null" >
+        TRANS_TYPE,
+      </if>
+      <if test="transSum != null" >
+        TRANS_SUM,
+      </if>
+      <if test="merTransFee != null" >
+        MER_TRANS_FEE,
+      </if>
+      <if test="instTransFee != null" >
+        INST_TRANS_FEE,
+      </if>
+      <if test="amtSum != null" >
+        AMT_SUM,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="instId != null" >
+        #{instId,jdbcType=VARCHAR},
+      </if>
+      <if test="transDate != null" >
+        #{transDate,jdbcType=CHAR},
+      </if>
+      <if test="transType != null" >
+        #{transType,jdbcType=VARCHAR},
+      </if>
+      <if test="transSum != null" >
+        #{transSum,jdbcType=VARCHAR},
+      </if>
+      <if test="merTransFee != null" >
+        #{merTransFee,jdbcType=VARCHAR},
+      </if>
+      <if test="instTransFee != null" >
+        #{instTransFee,jdbcType=VARCHAR},
+      </if>
+      <if test="amtSum != null" >
+        #{amtSum,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.TblInstProfitInfoExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_INST_PROFIT_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_INST_PROFIT_INFO
+    <set >
+      <if test="record.instId != null" >
+        INST_ID = #{record.instId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transDate != null" >
+        TRANS_DATE = #{record.transDate,jdbcType=CHAR},
+      </if>
+      <if test="record.transType != null" >
+        TRANS_TYPE = #{record.transType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transSum != null" >
+        TRANS_SUM = #{record.transSum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merTransFee != null" >
+        MER_TRANS_FEE = #{record.merTransFee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instTransFee != null" >
+        INST_TRANS_FEE = #{record.instTransFee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.amtSum != null" >
+        AMT_SUM = #{record.amtSum,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_INST_PROFIT_INFO
+    set INST_ID = #{record.instId,jdbcType=VARCHAR},
+      TRANS_DATE = #{record.transDate,jdbcType=CHAR},
+      TRANS_TYPE = #{record.transType,jdbcType=VARCHAR},
+      TRANS_SUM = #{record.transSum,jdbcType=VARCHAR},
+      MER_TRANS_FEE = #{record.merTransFee,jdbcType=VARCHAR},
+      INST_TRANS_FEE = #{record.instTransFee,jdbcType=VARCHAR},
+      AMT_SUM = #{record.amtSum,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <select id="countByCust" resultType="java.lang.Integer">
+		select
+		count(*)
+		from TBL_INST_PROFIT_INFO
+		WHERE 1=1
+		<if test="instId != null">
+			AND INST_ID =#{instId,jdbcType=VARCHAR}
+		</if>
+    <if test="startDate != null">
+      AND TRANS_DATE &gt;= #{startDate,jdbcType=VARCHAR}
+    </if>
+    <if test="endDate != null">
+      AND  TRANS_DATE  	&lt;= #{endDate,jdbcType=VARCHAR}
+    </if>
+        <if test="transType != null">
+          AND TRANS_TYPE =#{transType,jdbcType=VARCHAR}
+        </if>
+	</select>
+  
+  <select id="selectByCust" resultMap="BaseResultMap">
+		select P.*,I.INST_NAME
+		from TBL_INST_PROFIT_INFO P LEFT  JOIN  TBL_BTS_INST I
+        on P.INST_ID = I.INST_CODE
+		WHERE 1=1
+		<if test="instId != null">
+			AND P.INST_ID =#{instId,jdbcType=VARCHAR}
+		</if>
+		<if test="startDate != null">
+			AND P.TRANS_DATE &gt;= #{startDate,jdbcType=VARCHAR}
+		</if>
+        <if test="endDate != null">
+          AND  P.TRANS_DATE  	&lt;= #{endDate,jdbcType=VARCHAR}
+        </if>
+        <if test="transType != null">
+          AND P.TRANS_TYPE =#{transType,jdbcType=VARCHAR}
+        </if>
+	</select>
+</mapper>

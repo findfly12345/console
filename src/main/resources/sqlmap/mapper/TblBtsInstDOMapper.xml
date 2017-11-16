@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblBtsInstDOMapper">
+    <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblBtsInstDO">
+        <id column="INST_CODE" property="instCode" jdbcType="CHAR"/>
+        <result column="INST_TYPE" property="instType" jdbcType="CHAR"/>
+        <result column="INST_NAME" property="instName" jdbcType="VARCHAR"/>
+        <result column="INST_EMAIL" property="instEmail" jdbcType="VARCHAR"/>
+        <result column="INST_TELPHOME" property="instTelphome" jdbcType="VARCHAR"/>
+        <result column="CREATE_BY_ID" property="createById" jdbcType="VARCHAR"/>
+        <result column="UPDATE_BY_ID" property="updateById" jdbcType="VARCHAR"/>
+        <result column="CREATE_TIME" property="createTime" jdbcType="CHAR"/>
+        <result column="UPDATE_TIME" property="updateTime" jdbcType="CHAR"/>
+
+        <result column="MCC_TYPE" property="mccType" jdbcType="VARCHAR"/>
+        <result column="CALC_MODE" property="calcMode" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause">
+        <where>
+            <foreach collection="example.oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List">
+    INST_CODE, INST_TYPE, INST_NAME, INST_EMAIL, INST_TELPHOME, CREATE_BY_ID, UPDATE_BY_ID, 
+    CREATE_TIME, UPDATE_TIME
+  </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.TblBtsInstDOExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        <include refid="Base_Column_List"/>
+        from TBL_BTS_INST
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        <include refid="Base_Column_List"/>
+        from TBL_BTS_INST
+        where INST_CODE = #{instCode,jdbcType=CHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from TBL_BTS_INST
+    where INST_CODE = #{instCode,jdbcType=CHAR}
+  </delete>
+    <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblBtsInstDOExample">
+        delete from TBL_BTS_INST
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </delete>
+    <insert id="insert" parameterType="com.allcheer.bpos.entity.TblBtsInstDO">
+    insert into TBL_BTS_INST (INST_CODE, INST_TYPE, INST_NAME, 
+      INST_EMAIL, INST_TELPHOME, CREATE_BY_ID, 
+      UPDATE_BY_ID, CREATE_TIME, UPDATE_TIME
+      )
+    values (#{instCode,jdbcType=CHAR}, #{instType,jdbcType=CHAR}, #{instName,jdbcType=VARCHAR}, 
+      #{instEmail,jdbcType=VARCHAR}, #{instTelphome,jdbcType=VARCHAR}, #{createById,jdbcType=VARCHAR}, 
+      #{updateById,jdbcType=VARCHAR}, #{createTime,jdbcType=CHAR}, #{updateTime,jdbcType=CHAR}
+      )
+  </insert>
+    <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblBtsInstDO">
+        insert into TBL_BTS_INST
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="instCode != null">
+                INST_CODE,
+            </if>
+            <if test="instType != null">
+                INST_TYPE,
+            </if>
+            <if test="instName != null">
+                INST_NAME,
+            </if>
+            <if test="instEmail != null">
+                INST_EMAIL,
+            </if>
+            <if test="instTelphome != null">
+                INST_TELPHOME,
+            </if>
+            <if test="createById != null">
+                CREATE_BY_ID,
+            </if>
+            <if test="updateById != null">
+                UPDATE_BY_ID,
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME,
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="instCode != null">
+                #{instCode,jdbcType=CHAR},
+            </if>
+            <if test="instType != null">
+                #{instType,jdbcType=CHAR},
+            </if>
+            <if test="instName != null">
+                #{instName,jdbcType=VARCHAR},
+            </if>
+            <if test="instEmail != null">
+                #{instEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="instTelphome != null">
+                #{instTelphome,jdbcType=VARCHAR},
+            </if>
+            <if test="createById != null">
+                #{createById,jdbcType=VARCHAR},
+            </if>
+            <if test="updateById != null">
+                #{updateById,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=CHAR},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=CHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="com.allcheer.bpos.entity.TblBtsInstDOExample"
+            resultType="java.lang.Integer">
+        select count(*) from TBL_BTS_INST
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map">
+        update TBL_BTS_INST
+        <set>
+            <if test="record.instCode != null">
+                INST_CODE = #{record.instCode,jdbcType=CHAR},
+            </if>
+            <if test="record.instType != null">
+                INST_TYPE = #{record.instType,jdbcType=CHAR},
+            </if>
+            <if test="record.instName != null">
+                INST_NAME = #{record.instName,jdbcType=VARCHAR},
+            </if>
+            <if test="record.instEmail != null">
+                INST_EMAIL = #{record.instEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="record.instTelphome != null">
+                INST_TELPHOME = #{record.instTelphome,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createById != null">
+                CREATE_BY_ID = #{record.createById,jdbcType=VARCHAR},
+            </if>
+            <if test="record.updateById != null">
+                UPDATE_BY_ID = #{record.updateById,jdbcType=VARCHAR},
+            </if>
+            <if test="record.createTime != null">
+                CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+            </if>
+            <if test="record.updateTime != null">
+                UPDATE_TIME = #{record.updateTime,jdbcType=CHAR},
+            </if>
+        </set>
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map">
+        update TBL_BTS_INST
+        set INST_CODE = #{record.instCode,jdbcType=CHAR},
+        INST_TYPE = #{record.instType,jdbcType=CHAR},
+        INST_NAME = #{record.instName,jdbcType=VARCHAR},
+        INST_EMAIL = #{record.instEmail,jdbcType=VARCHAR},
+        INST_TELPHOME = #{record.instTelphome,jdbcType=VARCHAR},
+        CREATE_BY_ID = #{record.createById,jdbcType=VARCHAR},
+        UPDATE_BY_ID = #{record.updateById,jdbcType=VARCHAR},
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+        UPDATE_TIME = #{record.updateTime,jdbcType=CHAR}
+        <if test="_parameter != null">
+            <include refid="Update_By_Example_Where_Clause"/>
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.bpos.entity.TblBtsInstDO">
+        update TBL_BTS_INST
+        <set>
+            <if test="instType != null">
+                INST_TYPE = #{instType,jdbcType=CHAR},
+            </if>
+            <if test="instName != null">
+                INST_NAME = #{instName,jdbcType=VARCHAR},
+            </if>
+            <if test="instEmail != null">
+                INST_EMAIL = #{instEmail,jdbcType=VARCHAR},
+            </if>
+            <if test="instTelphome != null">
+                INST_TELPHOME = #{instTelphome,jdbcType=VARCHAR},
+            </if>
+            <if test="createById != null">
+                CREATE_BY_ID = #{createById,jdbcType=VARCHAR},
+            </if>
+            <if test="updateById != null">
+                UPDATE_BY_ID = #{updateById,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                CREATE_TIME = #{createTime,jdbcType=CHAR},
+            </if>
+            <if test="updateTime != null">
+                UPDATE_TIME = #{updateTime,jdbcType=CHAR},
+            </if>
+        </set>
+        where INST_CODE = #{instCode,jdbcType=CHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.allcheer.bpos.entity.TblBtsInstDO">
+    update TBL_BTS_INST
+    set INST_TYPE = #{instType,jdbcType=CHAR},
+      INST_NAME = #{instName,jdbcType=VARCHAR},
+      INST_EMAIL = #{instEmail,jdbcType=VARCHAR},
+      INST_TELPHOME = #{instTelphome,jdbcType=VARCHAR},
+      CREATE_BY_ID = #{createById,jdbcType=VARCHAR},
+      UPDATE_BY_ID = #{updateById,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=CHAR},
+      UPDATE_TIME = #{updateTime,jdbcType=CHAR}
+    where INST_CODE = #{instCode,jdbcType=CHAR}
+  </update>
+
+    <select id="instAndProfit" resultMap="BaseResultMap">
+        select t.INST_NAME,t.INST_CODE,m.CALC_MODE ,m.MCC_TYPE
+        from TBL_BTS_INST t left join TBL_INST_MCC_FEE_INFO m
+        on t.INST_CODE = m.INST_ID
+        where t.INST_CODE=#{instId}
+        and m.MCC_TYPE='02'
+    </select>
+
+
+    <select id="instCodeNext" resultMap="BaseResultMap">
+  	select TBL_BTS_INST_CODE_SEQ.NEXTVAL from dual
+  </select>
+
+
+
+
+</mapper>

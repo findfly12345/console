@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblBtsPosInfoDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblBtsPosInfoDO" >
+    <result column="GATE_ID" property="gateId" jdbcType="VARCHAR" />
+    <result column="POS_MER_ID" property="posMerId" jdbcType="VARCHAR" />
+    <result column="POS_TERM_ID" property="posTermId" jdbcType="VARCHAR" />
+    <result column="BATCH_ID" property="batchId" jdbcType="VARCHAR" />
+    <result column="INST_ID" property="instId" jdbcType="VARCHAR" />
+    <result column="INST_NAME" property="instName" jdbcType="VARCHAR" />
+    <result column="MAIN_KEY" property="mainKey" jdbcType="VARCHAR" />
+    <result column="MAC_KEY" property="macKey" jdbcType="VARCHAR" />
+    <result column="PIN_KEY" property="pinKey" jdbcType="VARCHAR" />
+    <result column="TD_KEY" property="tdKey" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    GATE_ID, POS_MER_ID, POS_TERM_ID, BATCH_ID, INST_ID, INST_NAME, MAIN_KEY, MAC_KEY, 
+    PIN_KEY, TD_KEY
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.TblBtsPosInfoDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_BANK_POS_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblBtsPosInfoDOExample" >
+    delete from TBL_BANK_POS_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.TblBtsPosInfoDO" >
+    insert into TBL_BANK_POS_INFO (GATE_ID, POS_MER_ID, POS_TERM_ID, 
+      BATCH_ID, INST_ID, INST_NAME, 
+      MAIN_KEY, MAC_KEY, PIN_KEY, 
+      TD_KEY)
+    values (#{gateId,jdbcType=VARCHAR}, #{posMerId,jdbcType=VARCHAR}, #{posTermId,jdbcType=VARCHAR}, 
+      #{batchId,jdbcType=VARCHAR}, #{instId,jdbcType=VARCHAR}, #{instName,jdbcType=VARCHAR}, 
+      #{mainKey,jdbcType=VARCHAR}, #{macKey,jdbcType=VARCHAR}, #{pinKey,jdbcType=VARCHAR}, 
+      #{tdKey,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblBtsPosInfoDO" >
+    insert into TBL_BANK_POS_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gateId != null" >
+        GATE_ID,
+      </if>
+      <if test="posMerId != null" >
+        POS_MER_ID,
+      </if>
+      <if test="posTermId != null" >
+        POS_TERM_ID,
+      </if>
+      <if test="batchId != null" >
+        BATCH_ID,
+      </if>
+      <if test="instId != null" >
+        INST_ID,
+      </if>
+      <if test="instName != null" >
+        INST_NAME,
+      </if>
+      <if test="mainKey != null" >
+        MAIN_KEY,
+      </if>
+      <if test="macKey != null" >
+        MAC_KEY,
+      </if>
+      <if test="pinKey != null" >
+        PIN_KEY,
+      </if>
+      <if test="tdKey != null" >
+        TD_KEY,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gateId != null" >
+        #{gateId,jdbcType=VARCHAR},
+      </if>
+      <if test="posMerId != null" >
+        #{posMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="posTermId != null" >
+        #{posTermId,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null" >
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="instId != null" >
+        #{instId,jdbcType=VARCHAR},
+      </if>
+      <if test="instName != null" >
+        #{instName,jdbcType=VARCHAR},
+      </if>
+      <if test="mainKey != null" >
+        #{mainKey,jdbcType=VARCHAR},
+      </if>
+      <if test="macKey != null" >
+        #{macKey,jdbcType=VARCHAR},
+      </if>
+      <if test="pinKey != null" >
+        #{pinKey,jdbcType=VARCHAR},
+      </if>
+      <if test="tdKey != null" >
+        #{tdKey,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.TblBtsPosInfoDOExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_BANK_POS_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_BANK_POS_INFO
+    <set >
+      <if test="record.gateId != null" >
+        GATE_ID = #{record.gateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posMerId != null" >
+        POS_MER_ID = #{record.posMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posTermId != null" >
+        POS_TERM_ID = #{record.posTermId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchId != null" >
+        BATCH_ID = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instId != null" >
+        INST_ID = #{record.instId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instName != null" >
+        INST_NAME = #{record.instName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mainKey != null" >
+        MAIN_KEY = #{record.mainKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.macKey != null" >
+        MAC_KEY = #{record.macKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pinKey != null" >
+        PIN_KEY = #{record.pinKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tdKey != null" >
+        TD_KEY = #{record.tdKey,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_BANK_POS_INFO
+    set GATE_ID = #{record.gateId,jdbcType=VARCHAR},
+      POS_MER_ID = #{record.posMerId,jdbcType=VARCHAR},
+      POS_TERM_ID = #{record.posTermId,jdbcType=VARCHAR},
+      BATCH_ID = #{record.batchId,jdbcType=VARCHAR},
+      INST_ID = #{record.instId,jdbcType=VARCHAR},
+      INST_NAME = #{record.instName,jdbcType=VARCHAR},
+      MAIN_KEY = #{record.mainKey,jdbcType=VARCHAR},
+      MAC_KEY = #{record.macKey,jdbcType=VARCHAR},
+      PIN_KEY = #{record.pinKey,jdbcType=VARCHAR},
+      TD_KEY = #{record.tdKey,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

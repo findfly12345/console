@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblRiskCtrlReglMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblRiskCtrlRegl" >
+    <id column="RISK_NUM" property="riskNum" jdbcType="CHAR" />
+    <id column="PARAM_NUM" property="paramNum" jdbcType="CHAR" />
+    <result column="PARAM_VAL" property="paramVal" jdbcType="VARCHAR" />
+    <result column="RISK_FLAG" property="riskFlag" jdbcType="CHAR" />
+    <result column="MOD_OPER" property="modOper" jdbcType="VARCHAR" />
+    <result column="MOD_DATE" property="modDate" jdbcType="CHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    RISK_NUM, PARAM_NUM, PARAM_VAL, RISK_FLAG, MOD_OPER, MOD_DATE, REMARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.TblRiskCtrlReglExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_RISK_CTRL_REGL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.TblRiskCtrlReglKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_RISK_CTRL_REGL
+    where RISK_NUM = #{riskNum,jdbcType=CHAR}
+      and PARAM_NUM = #{paramNum,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.allcheer.bpos.entity.TblRiskCtrlReglKey" >
+    delete from TBL_RISK_CTRL_REGL
+    where RISK_NUM = #{riskNum,jdbcType=CHAR}
+      and PARAM_NUM = #{paramNum,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblRiskCtrlReglExample" >
+    delete from TBL_RISK_CTRL_REGL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.TblRiskCtrlRegl" >
+    insert into TBL_RISK_CTRL_REGL (RISK_NUM, PARAM_NUM, PARAM_VAL, 
+      RISK_FLAG, MOD_OPER, MOD_DATE, 
+      REMARK)
+    values (#{riskNum,jdbcType=CHAR}, #{paramNum,jdbcType=CHAR}, #{paramVal,jdbcType=VARCHAR}, 
+      #{riskFlag,jdbcType=CHAR}, #{modOper,jdbcType=VARCHAR}, #{modDate,jdbcType=CHAR}, 
+      #{remark,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblRiskCtrlRegl" >
+    insert into TBL_RISK_CTRL_REGL
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="riskNum != null" >
+        RISK_NUM,
+      </if>
+      <if test="paramNum != null" >
+        PARAM_NUM,
+      </if>
+      <if test="paramVal != null" >
+        PARAM_VAL,
+      </if>
+      <if test="riskFlag != null" >
+        RISK_FLAG,
+      </if>
+      <if test="modOper != null" >
+        MOD_OPER,
+      </if>
+      <if test="modDate != null" >
+        MOD_DATE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="riskNum != null" >
+        #{riskNum,jdbcType=CHAR},
+      </if>
+      <if test="paramNum != null" >
+        #{paramNum,jdbcType=CHAR},
+      </if>
+      <if test="paramVal != null" >
+        #{paramVal,jdbcType=VARCHAR},
+      </if>
+      <if test="riskFlag != null" >
+        #{riskFlag,jdbcType=CHAR},
+      </if>
+      <if test="modOper != null" >
+        #{modOper,jdbcType=VARCHAR},
+      </if>
+      <if test="modDate != null" >
+        #{modDate,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.TblRiskCtrlReglExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_RISK_CTRL_REGL
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_RISK_CTRL_REGL
+    <set >
+      <if test="record.riskNum != null" >
+        RISK_NUM = #{record.riskNum,jdbcType=CHAR},
+      </if>
+      <if test="record.paramNum != null" >
+        PARAM_NUM = #{record.paramNum,jdbcType=CHAR},
+      </if>
+      <if test="record.paramVal != null" >
+        PARAM_VAL = #{record.paramVal,jdbcType=VARCHAR},
+      </if>
+      <if test="record.riskFlag != null" >
+        RISK_FLAG = #{record.riskFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.modOper != null" >
+        MOD_OPER = #{record.modOper,jdbcType=VARCHAR},
+      </if>
+      <if test="record.modDate != null" >
+        MOD_DATE = #{record.modDate,jdbcType=CHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_RISK_CTRL_REGL
+    set RISK_NUM = #{record.riskNum,jdbcType=CHAR},
+      PARAM_NUM = #{record.paramNum,jdbcType=CHAR},
+      PARAM_VAL = #{record.paramVal,jdbcType=VARCHAR},
+      RISK_FLAG = #{record.riskFlag,jdbcType=CHAR},
+      MOD_OPER = #{record.modOper,jdbcType=VARCHAR},
+      MOD_DATE = #{record.modDate,jdbcType=CHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.bpos.entity.TblRiskCtrlRegl" >
+    update TBL_RISK_CTRL_REGL
+    <set >
+      <if test="paramVal != null" >
+        PARAM_VAL = #{paramVal,jdbcType=VARCHAR},
+      </if>
+      <if test="riskFlag != null" >
+        RISK_FLAG = #{riskFlag,jdbcType=CHAR},
+      </if>
+      <if test="modOper != null" >
+        MOD_OPER = #{modOper,jdbcType=VARCHAR},
+      </if>
+      <if test="modDate != null" >
+        MOD_DATE = #{modDate,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where RISK_NUM = #{riskNum,jdbcType=CHAR}
+      and PARAM_NUM = #{paramNum,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.bpos.entity.TblRiskCtrlRegl" >
+    update TBL_RISK_CTRL_REGL
+    set PARAM_VAL = #{paramVal,jdbcType=VARCHAR},
+      RISK_FLAG = #{riskFlag,jdbcType=CHAR},
+      MOD_OPER = #{modOper,jdbcType=VARCHAR},
+      MOD_DATE = #{modDate,jdbcType=CHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where RISK_NUM = #{riskNum,jdbcType=CHAR}
+      and PARAM_NUM = #{paramNum,jdbcType=CHAR}
+  </update>
+</mapper>

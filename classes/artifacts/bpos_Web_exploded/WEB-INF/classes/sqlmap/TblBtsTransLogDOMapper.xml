@@ -1,0 +1,983 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblBtsTransLogDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblBtsTransLogDO" >
+    <result column="MER_ID" property="merId" jdbcType="VARCHAR" />
+    <result column="ORD_ID" property="ordId" jdbcType="VARCHAR" />
+    <result column="CARD_NO" property="cardNo" jdbcType="VARCHAR" />
+    <result column="TRANS_TYPE" property="transType" jdbcType="VARCHAR" />
+    <result column="PNR_DEV_ID" property="pnrDevId" jdbcType="VARCHAR" />
+    <result column="POS_DEV_ID" property="posDevId" jdbcType="VARCHAR" />
+    <result column="GATE_ID" property="gateId" jdbcType="VARCHAR" />
+    <result column="POS_MER_ID" property="posMerId" jdbcType="VARCHAR" />
+    <result column="POS_TERM_ID" property="posTermId" jdbcType="VARCHAR" />
+    <result column="ORD_AMT" property="ordAmt" jdbcType="VARCHAR" />
+    <result column="REF_AMT" property="refAmt" jdbcType="VARCHAR" />
+    <result column="FEE_AMT" property="feeAmt" jdbcType="VARCHAR" />
+    <result column="SYS_TIME" property="sysTime" jdbcType="VARCHAR" />
+    <result column="ACCT_DATE" property="acctDate" jdbcType="VARCHAR" />
+    <result column="SYS_SEQ_ID" property="sysSeqId" jdbcType="VARCHAR" />
+    <result column="POS_SEQ_ID" property="posSeqId" jdbcType="VARCHAR" />
+    <result column="RESP_CD" property="respCd" jdbcType="VARCHAR" />
+    <result column="REF_NUM" property="refNum" jdbcType="VARCHAR" />
+    <result column="AUTH_CODE" property="authCode" jdbcType="VARCHAR" />
+    <result column="BATCH_ID" property="batchId" jdbcType="VARCHAR" />
+    <result column="CUST_ID" property="custId" jdbcType="VARCHAR" />
+    <result column="MER_USR_ID" property="merUsrId" jdbcType="VARCHAR" />
+    <result column="MER_ORD_ID" property="merOrdId" jdbcType="VARCHAR" />
+    <result column="REMARK_TYPE" property="remarkType" jdbcType="VARCHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="TRANS_STAT" property="transStat" jdbcType="VARCHAR" />
+    <result column="BANK_STAT" property="bankStat" jdbcType="VARCHAR" />
+    <result column="CHK_FLAG" property="chkFlag" jdbcType="VARCHAR" />
+    <result column="PROC_DRI" property="procDri" jdbcType="VARCHAR" />
+    <result column="MACHINE_NO" property="machineNo" jdbcType="VARCHAR" />
+    <result column="TERM_FLAG" property="termFlag" jdbcType="VARCHAR" />
+    <result column="CALC_MODE" property="calcMode" jdbcType="VARCHAR" />
+    <result column="POS_SYSTEM" property="posSystem" jdbcType="VARCHAR" />
+    <result column="FIELD22" property="field22" jdbcType="VARCHAR" />
+    <result column="TRANS_DATE_TIME" property="transDateTime" jdbcType="VARCHAR" />
+    <result column="SYS_TRACE_AUDIT_NUM" property="sysTraceAuditNum" jdbcType="VARCHAR" />
+    <result column="MCHNT_TYPE" property="mchntType" jdbcType="VARCHAR" />
+    <result column="ACQ_INST_ID_CODE" property="acqInstIdCode" jdbcType="VARCHAR" />
+    <result column="FWD_INST_ID_CODE" property="fwdInstIdCode" jdbcType="VARCHAR" />
+    <result column="INST_POS_TERM_ID" property="instPosTermId" jdbcType="VARCHAR" />
+    <result column="INST_POS_MER_ID" property="instPosMerId" jdbcType="VARCHAR" />
+    <result column="SYS_MER_NAME" property="sysMerName" jdbcType="VARCHAR" />
+    <result column="FLD_RESERVED" property="fldReserved" jdbcType="VARCHAR" />
+    <result column="REF_NO" property="refNo" jdbcType="VARCHAR" />
+    <result column="RCV_INST_ID_CODE" property="rcvInstIdCode" jdbcType="VARCHAR" />
+    <result column="TXN_NUM" property="txnNum" jdbcType="VARCHAR" />
+    <result column="TYPE_PROCESS_CODE" property="typeProcessCode" jdbcType="VARCHAR" />
+    <result column="AGENT_ID" property="agentId" jdbcType="VARCHAR" />
+    <result column="CARD_FLAG" property="cardFlag" jdbcType="CHAR" />
+    <result column="PROFIT_AMT" property="profitAmt" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.allcheer.bpos.entity.TblBtsTransLogDO" extends="BaseResultMap" >
+    <result column="PID" property="pid" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    MER_ID, ORD_ID, CARD_NO, TRANS_TYPE, PNR_DEV_ID, POS_DEV_ID, GATE_ID, POS_MER_ID, 
+    POS_TERM_ID, ORD_AMT, REF_AMT, FEE_AMT, SYS_TIME, ACCT_DATE, SYS_SEQ_ID, POS_SEQ_ID, 
+    RESP_CD, REF_NUM, AUTH_CODE, BATCH_ID, CUST_ID, MER_USR_ID, MER_ORD_ID, REMARK_TYPE, 
+    REMARK, TRANS_STAT, BANK_STAT, CHK_FLAG, PROC_DRI, MACHINE_NO, TERM_FLAG, CALC_MODE, 
+    POS_SYSTEM, FIELD22, TRANS_DATE_TIME, SYS_TRACE_AUDIT_NUM, MCHNT_TYPE, ACQ_INST_ID_CODE, 
+    FWD_INST_ID_CODE, INST_POS_TERM_ID, INST_POS_MER_ID, SYS_MER_NAME, FLD_RESERVED, 
+    REF_NO, RCV_INST_ID_CODE, TXN_NUM, TYPE_PROCESS_CODE, AGENT_ID, CARD_FLAG, PROFIT_AMT
+  </sql>
+  <sql id="Blob_Column_List" >
+    PID
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.allcheer.bpos.entity.TblBtsTransLogDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from PNR_ORD_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.TblBtsTransLogDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from PNR_ORD_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblBtsTransLogDOExample" >
+    delete from PNR_ORD_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.TblBtsTransLogDO" >
+    insert into PNR_ORD_LOG (MER_ID, ORD_ID, CARD_NO, 
+      TRANS_TYPE, PNR_DEV_ID, POS_DEV_ID, 
+      GATE_ID, POS_MER_ID, POS_TERM_ID, 
+      ORD_AMT, REF_AMT, FEE_AMT, 
+      SYS_TIME, ACCT_DATE, SYS_SEQ_ID, 
+      POS_SEQ_ID, RESP_CD, REF_NUM, 
+      AUTH_CODE, BATCH_ID, CUST_ID, 
+      MER_USR_ID, MER_ORD_ID, REMARK_TYPE, 
+      REMARK, TRANS_STAT, BANK_STAT, 
+      CHK_FLAG, PROC_DRI, MACHINE_NO, 
+      TERM_FLAG, CALC_MODE, POS_SYSTEM, 
+      FIELD22, TRANS_DATE_TIME, SYS_TRACE_AUDIT_NUM, 
+      MCHNT_TYPE, ACQ_INST_ID_CODE, FWD_INST_ID_CODE, 
+      INST_POS_TERM_ID, INST_POS_MER_ID, SYS_MER_NAME, 
+      FLD_RESERVED, REF_NO, RCV_INST_ID_CODE, 
+      TXN_NUM, TYPE_PROCESS_CODE, AGENT_ID, 
+      CARD_FLAG, PROFIT_AMT, PID
+      )
+    values (#{merId,jdbcType=VARCHAR}, #{ordId,jdbcType=VARCHAR}, #{cardNo,jdbcType=VARCHAR}, 
+      #{transType,jdbcType=VARCHAR}, #{pnrDevId,jdbcType=VARCHAR}, #{posDevId,jdbcType=VARCHAR}, 
+      #{gateId,jdbcType=VARCHAR}, #{posMerId,jdbcType=VARCHAR}, #{posTermId,jdbcType=VARCHAR}, 
+      #{ordAmt,jdbcType=VARCHAR}, #{refAmt,jdbcType=VARCHAR}, #{feeAmt,jdbcType=VARCHAR}, 
+      #{sysTime,jdbcType=VARCHAR}, #{acctDate,jdbcType=VARCHAR}, #{sysSeqId,jdbcType=VARCHAR}, 
+      #{posSeqId,jdbcType=VARCHAR}, #{respCd,jdbcType=VARCHAR}, #{refNum,jdbcType=VARCHAR}, 
+      #{authCode,jdbcType=VARCHAR}, #{batchId,jdbcType=VARCHAR}, #{custId,jdbcType=VARCHAR}, 
+      #{merUsrId,jdbcType=VARCHAR}, #{merOrdId,jdbcType=VARCHAR}, #{remarkType,jdbcType=VARCHAR}, 
+      #{remark,jdbcType=VARCHAR}, #{transStat,jdbcType=VARCHAR}, #{bankStat,jdbcType=VARCHAR}, 
+      #{chkFlag,jdbcType=VARCHAR}, #{procDri,jdbcType=VARCHAR}, #{machineNo,jdbcType=VARCHAR}, 
+      #{termFlag,jdbcType=VARCHAR}, #{calcMode,jdbcType=VARCHAR}, #{posSystem,jdbcType=VARCHAR}, 
+      #{field22,jdbcType=VARCHAR}, #{transDateTime,jdbcType=VARCHAR}, #{sysTraceAuditNum,jdbcType=VARCHAR}, 
+      #{mchntType,jdbcType=VARCHAR}, #{acqInstIdCode,jdbcType=VARCHAR}, #{fwdInstIdCode,jdbcType=VARCHAR}, 
+      #{instPosTermId,jdbcType=VARCHAR}, #{instPosMerId,jdbcType=VARCHAR}, #{sysMerName,jdbcType=VARCHAR}, 
+      #{fldReserved,jdbcType=VARCHAR}, #{refNo,jdbcType=VARCHAR}, #{rcvInstIdCode,jdbcType=VARCHAR}, 
+      #{txnNum,jdbcType=VARCHAR}, #{typeProcessCode,jdbcType=VARCHAR}, #{agentId,jdbcType=VARCHAR}, 
+      #{cardFlag,jdbcType=CHAR}, #{profitAmt,jdbcType=VARCHAR}, #{pid,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblBtsTransLogDO" >
+    insert into PNR_ORD_LOG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="merId != null" >
+        MER_ID,
+      </if>
+      <if test="ordId != null" >
+        ORD_ID,
+      </if>
+      <if test="cardNo != null" >
+        CARD_NO,
+      </if>
+      <if test="transType != null" >
+        TRANS_TYPE,
+      </if>
+      <if test="pnrDevId != null" >
+        PNR_DEV_ID,
+      </if>
+      <if test="posDevId != null" >
+        POS_DEV_ID,
+      </if>
+      <if test="gateId != null" >
+        GATE_ID,
+      </if>
+      <if test="posMerId != null" >
+        POS_MER_ID,
+      </if>
+      <if test="posTermId != null" >
+        POS_TERM_ID,
+      </if>
+      <if test="ordAmt != null" >
+        ORD_AMT,
+      </if>
+      <if test="refAmt != null" >
+        REF_AMT,
+      </if>
+      <if test="feeAmt != null" >
+        FEE_AMT,
+      </if>
+      <if test="sysTime != null" >
+        SYS_TIME,
+      </if>
+      <if test="acctDate != null" >
+        ACCT_DATE,
+      </if>
+      <if test="sysSeqId != null" >
+        SYS_SEQ_ID,
+      </if>
+      <if test="posSeqId != null" >
+        POS_SEQ_ID,
+      </if>
+      <if test="respCd != null" >
+        RESP_CD,
+      </if>
+      <if test="refNum != null" >
+        REF_NUM,
+      </if>
+      <if test="authCode != null" >
+        AUTH_CODE,
+      </if>
+      <if test="batchId != null" >
+        BATCH_ID,
+      </if>
+      <if test="custId != null" >
+        CUST_ID,
+      </if>
+      <if test="merUsrId != null" >
+        MER_USR_ID,
+      </if>
+      <if test="merOrdId != null" >
+        MER_ORD_ID,
+      </if>
+      <if test="remarkType != null" >
+        REMARK_TYPE,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+      <if test="transStat != null" >
+        TRANS_STAT,
+      </if>
+      <if test="bankStat != null" >
+        BANK_STAT,
+      </if>
+      <if test="chkFlag != null" >
+        CHK_FLAG,
+      </if>
+      <if test="procDri != null" >
+        PROC_DRI,
+      </if>
+      <if test="machineNo != null" >
+        MACHINE_NO,
+      </if>
+      <if test="termFlag != null" >
+        TERM_FLAG,
+      </if>
+      <if test="calcMode != null" >
+        CALC_MODE,
+      </if>
+      <if test="posSystem != null" >
+        POS_SYSTEM,
+      </if>
+      <if test="field22 != null" >
+        FIELD22,
+      </if>
+      <if test="transDateTime != null" >
+        TRANS_DATE_TIME,
+      </if>
+      <if test="sysTraceAuditNum != null" >
+        SYS_TRACE_AUDIT_NUM,
+      </if>
+      <if test="mchntType != null" >
+        MCHNT_TYPE,
+      </if>
+      <if test="acqInstIdCode != null" >
+        ACQ_INST_ID_CODE,
+      </if>
+      <if test="fwdInstIdCode != null" >
+        FWD_INST_ID_CODE,
+      </if>
+      <if test="instPosTermId != null" >
+        INST_POS_TERM_ID,
+      </if>
+      <if test="instPosMerId != null" >
+        INST_POS_MER_ID,
+      </if>
+      <if test="sysMerName != null" >
+        SYS_MER_NAME,
+      </if>
+      <if test="fldReserved != null" >
+        FLD_RESERVED,
+      </if>
+      <if test="refNo != null" >
+        REF_NO,
+      </if>
+      <if test="rcvInstIdCode != null" >
+        RCV_INST_ID_CODE,
+      </if>
+      <if test="txnNum != null" >
+        TXN_NUM,
+      </if>
+      <if test="typeProcessCode != null" >
+        TYPE_PROCESS_CODE,
+      </if>
+      <if test="agentId != null" >
+        AGENT_ID,
+      </if>
+      <if test="cardFlag != null" >
+        CARD_FLAG,
+      </if>
+      <if test="profitAmt != null" >
+        PROFIT_AMT,
+      </if>
+      <if test="pid != null" >
+        PID,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="merId != null" >
+        #{merId,jdbcType=VARCHAR},
+      </if>
+      <if test="ordId != null" >
+        #{ordId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="transType != null" >
+        #{transType,jdbcType=VARCHAR},
+      </if>
+      <if test="pnrDevId != null" >
+        #{pnrDevId,jdbcType=VARCHAR},
+      </if>
+      <if test="posDevId != null" >
+        #{posDevId,jdbcType=VARCHAR},
+      </if>
+      <if test="gateId != null" >
+        #{gateId,jdbcType=VARCHAR},
+      </if>
+      <if test="posMerId != null" >
+        #{posMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="posTermId != null" >
+        #{posTermId,jdbcType=VARCHAR},
+      </if>
+      <if test="ordAmt != null" >
+        #{ordAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="refAmt != null" >
+        #{refAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="feeAmt != null" >
+        #{feeAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="sysTime != null" >
+        #{sysTime,jdbcType=VARCHAR},
+      </if>
+      <if test="acctDate != null" >
+        #{acctDate,jdbcType=VARCHAR},
+      </if>
+      <if test="sysSeqId != null" >
+        #{sysSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="posSeqId != null" >
+        #{posSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="respCd != null" >
+        #{respCd,jdbcType=VARCHAR},
+      </if>
+      <if test="refNum != null" >
+        #{refNum,jdbcType=VARCHAR},
+      </if>
+      <if test="authCode != null" >
+        #{authCode,jdbcType=VARCHAR},
+      </if>
+      <if test="batchId != null" >
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="custId != null" >
+        #{custId,jdbcType=VARCHAR},
+      </if>
+      <if test="merUsrId != null" >
+        #{merUsrId,jdbcType=VARCHAR},
+      </if>
+      <if test="merOrdId != null" >
+        #{merOrdId,jdbcType=VARCHAR},
+      </if>
+      <if test="remarkType != null" >
+        #{remarkType,jdbcType=VARCHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="transStat != null" >
+        #{transStat,jdbcType=VARCHAR},
+      </if>
+      <if test="bankStat != null" >
+        #{bankStat,jdbcType=VARCHAR},
+      </if>
+      <if test="chkFlag != null" >
+        #{chkFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="procDri != null" >
+        #{procDri,jdbcType=VARCHAR},
+      </if>
+      <if test="machineNo != null" >
+        #{machineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="termFlag != null" >
+        #{termFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="calcMode != null" >
+        #{calcMode,jdbcType=VARCHAR},
+      </if>
+      <if test="posSystem != null" >
+        #{posSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="field22 != null" >
+        #{field22,jdbcType=VARCHAR},
+      </if>
+      <if test="transDateTime != null" >
+        #{transDateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sysTraceAuditNum != null" >
+        #{sysTraceAuditNum,jdbcType=VARCHAR},
+      </if>
+      <if test="mchntType != null" >
+        #{mchntType,jdbcType=VARCHAR},
+      </if>
+      <if test="acqInstIdCode != null" >
+        #{acqInstIdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="fwdInstIdCode != null" >
+        #{fwdInstIdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="instPosTermId != null" >
+        #{instPosTermId,jdbcType=VARCHAR},
+      </if>
+      <if test="instPosMerId != null" >
+        #{instPosMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="sysMerName != null" >
+        #{sysMerName,jdbcType=VARCHAR},
+      </if>
+      <if test="fldReserved != null" >
+        #{fldReserved,jdbcType=VARCHAR},
+      </if>
+      <if test="refNo != null" >
+        #{refNo,jdbcType=VARCHAR},
+      </if>
+      <if test="rcvInstIdCode != null" >
+        #{rcvInstIdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="txnNum != null" >
+        #{txnNum,jdbcType=VARCHAR},
+      </if>
+      <if test="typeProcessCode != null" >
+        #{typeProcessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="agentId != null" >
+        #{agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardFlag != null" >
+        #{cardFlag,jdbcType=CHAR},
+      </if>
+      <if test="profitAmt != null" >
+        #{profitAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null" >
+        #{pid,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.TblBtsTransLogDOExample" resultType="java.lang.Integer" >
+    select count(*) from PNR_ORD_LOG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update PNR_ORD_LOG
+    <set >
+      <if test="record.merId != null" >
+        MER_ID = #{record.merId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordId != null" >
+        ORD_ID = #{record.ordId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNo != null" >
+        CARD_NO = #{record.cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transType != null" >
+        TRANS_TYPE = #{record.transType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pnrDevId != null" >
+        PNR_DEV_ID = #{record.pnrDevId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posDevId != null" >
+        POS_DEV_ID = #{record.posDevId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gateId != null" >
+        GATE_ID = #{record.gateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posMerId != null" >
+        POS_MER_ID = #{record.posMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posTermId != null" >
+        POS_TERM_ID = #{record.posTermId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ordAmt != null" >
+        ORD_AMT = #{record.ordAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refAmt != null" >
+        REF_AMT = #{record.refAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.feeAmt != null" >
+        FEE_AMT = #{record.feeAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysTime != null" >
+        SYS_TIME = #{record.sysTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acctDate != null" >
+        ACCT_DATE = #{record.acctDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysSeqId != null" >
+        SYS_SEQ_ID = #{record.sysSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posSeqId != null" >
+        POS_SEQ_ID = #{record.posSeqId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.respCd != null" >
+        RESP_CD = #{record.respCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refNum != null" >
+        REF_NUM = #{record.refNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.authCode != null" >
+        AUTH_CODE = #{record.authCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.batchId != null" >
+        BATCH_ID = #{record.batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.custId != null" >
+        CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merUsrId != null" >
+        MER_USR_ID = #{record.merUsrId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merOrdId != null" >
+        MER_ORD_ID = #{record.merOrdId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remarkType != null" >
+        REMARK_TYPE = #{record.remarkType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transStat != null" >
+        TRANS_STAT = #{record.transStat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bankStat != null" >
+        BANK_STAT = #{record.bankStat,jdbcType=VARCHAR},
+      </if>
+      <if test="record.chkFlag != null" >
+        CHK_FLAG = #{record.chkFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.procDri != null" >
+        PROC_DRI = #{record.procDri,jdbcType=VARCHAR},
+      </if>
+      <if test="record.machineNo != null" >
+        MACHINE_NO = #{record.machineNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.termFlag != null" >
+        TERM_FLAG = #{record.termFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.calcMode != null" >
+        CALC_MODE = #{record.calcMode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posSystem != null" >
+        POS_SYSTEM = #{record.posSystem,jdbcType=VARCHAR},
+      </if>
+      <if test="record.field22 != null" >
+        FIELD22 = #{record.field22,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transDateTime != null" >
+        TRANS_DATE_TIME = #{record.transDateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysTraceAuditNum != null" >
+        SYS_TRACE_AUDIT_NUM = #{record.sysTraceAuditNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mchntType != null" >
+        MCHNT_TYPE = #{record.mchntType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.acqInstIdCode != null" >
+        ACQ_INST_ID_CODE = #{record.acqInstIdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fwdInstIdCode != null" >
+        FWD_INST_ID_CODE = #{record.fwdInstIdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instPosTermId != null" >
+        INST_POS_TERM_ID = #{record.instPosTermId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instPosMerId != null" >
+        INST_POS_MER_ID = #{record.instPosMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sysMerName != null" >
+        SYS_MER_NAME = #{record.sysMerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fldReserved != null" >
+        FLD_RESERVED = #{record.fldReserved,jdbcType=VARCHAR},
+      </if>
+      <if test="record.refNo != null" >
+        REF_NO = #{record.refNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rcvInstIdCode != null" >
+        RCV_INST_ID_CODE = #{record.rcvInstIdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.txnNum != null" >
+        TXN_NUM = #{record.txnNum,jdbcType=VARCHAR},
+      </if>
+      <if test="record.typeProcessCode != null" >
+        TYPE_PROCESS_CODE = #{record.typeProcessCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentId != null" >
+        AGENT_ID = #{record.agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardFlag != null" >
+        CARD_FLAG = #{record.cardFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.profitAmt != null" >
+        PROFIT_AMT = #{record.profitAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pid != null" >
+        PID = #{record.pid,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update PNR_ORD_LOG
+    set MER_ID = #{record.merId,jdbcType=VARCHAR},
+      ORD_ID = #{record.ordId,jdbcType=VARCHAR},
+      CARD_NO = #{record.cardNo,jdbcType=VARCHAR},
+      TRANS_TYPE = #{record.transType,jdbcType=VARCHAR},
+      PNR_DEV_ID = #{record.pnrDevId,jdbcType=VARCHAR},
+      POS_DEV_ID = #{record.posDevId,jdbcType=VARCHAR},
+      GATE_ID = #{record.gateId,jdbcType=VARCHAR},
+      POS_MER_ID = #{record.posMerId,jdbcType=VARCHAR},
+      POS_TERM_ID = #{record.posTermId,jdbcType=VARCHAR},
+      ORD_AMT = #{record.ordAmt,jdbcType=VARCHAR},
+      REF_AMT = #{record.refAmt,jdbcType=VARCHAR},
+      FEE_AMT = #{record.feeAmt,jdbcType=VARCHAR},
+      SYS_TIME = #{record.sysTime,jdbcType=VARCHAR},
+      ACCT_DATE = #{record.acctDate,jdbcType=VARCHAR},
+      SYS_SEQ_ID = #{record.sysSeqId,jdbcType=VARCHAR},
+      POS_SEQ_ID = #{record.posSeqId,jdbcType=VARCHAR},
+      RESP_CD = #{record.respCd,jdbcType=VARCHAR},
+      REF_NUM = #{record.refNum,jdbcType=VARCHAR},
+      AUTH_CODE = #{record.authCode,jdbcType=VARCHAR},
+      BATCH_ID = #{record.batchId,jdbcType=VARCHAR},
+      CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      MER_USR_ID = #{record.merUsrId,jdbcType=VARCHAR},
+      MER_ORD_ID = #{record.merOrdId,jdbcType=VARCHAR},
+      REMARK_TYPE = #{record.remarkType,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      TRANS_STAT = #{record.transStat,jdbcType=VARCHAR},
+      BANK_STAT = #{record.bankStat,jdbcType=VARCHAR},
+      CHK_FLAG = #{record.chkFlag,jdbcType=VARCHAR},
+      PROC_DRI = #{record.procDri,jdbcType=VARCHAR},
+      MACHINE_NO = #{record.machineNo,jdbcType=VARCHAR},
+      TERM_FLAG = #{record.termFlag,jdbcType=VARCHAR},
+      CALC_MODE = #{record.calcMode,jdbcType=VARCHAR},
+      POS_SYSTEM = #{record.posSystem,jdbcType=VARCHAR},
+      FIELD22 = #{record.field22,jdbcType=VARCHAR},
+      TRANS_DATE_TIME = #{record.transDateTime,jdbcType=VARCHAR},
+      SYS_TRACE_AUDIT_NUM = #{record.sysTraceAuditNum,jdbcType=VARCHAR},
+      MCHNT_TYPE = #{record.mchntType,jdbcType=VARCHAR},
+      ACQ_INST_ID_CODE = #{record.acqInstIdCode,jdbcType=VARCHAR},
+      FWD_INST_ID_CODE = #{record.fwdInstIdCode,jdbcType=VARCHAR},
+      INST_POS_TERM_ID = #{record.instPosTermId,jdbcType=VARCHAR},
+      INST_POS_MER_ID = #{record.instPosMerId,jdbcType=VARCHAR},
+      SYS_MER_NAME = #{record.sysMerName,jdbcType=VARCHAR},
+      FLD_RESERVED = #{record.fldReserved,jdbcType=VARCHAR},
+      REF_NO = #{record.refNo,jdbcType=VARCHAR},
+      RCV_INST_ID_CODE = #{record.rcvInstIdCode,jdbcType=VARCHAR},
+      TXN_NUM = #{record.txnNum,jdbcType=VARCHAR},
+      TYPE_PROCESS_CODE = #{record.typeProcessCode,jdbcType=VARCHAR},
+      AGENT_ID = #{record.agentId,jdbcType=VARCHAR},
+      CARD_FLAG = #{record.cardFlag,jdbcType=CHAR},
+      PROFIT_AMT = #{record.profitAmt,jdbcType=VARCHAR},
+      PID = #{record.pid,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update PNR_ORD_LOG
+    set MER_ID = #{record.merId,jdbcType=VARCHAR},
+      ORD_ID = #{record.ordId,jdbcType=VARCHAR},
+      CARD_NO = #{record.cardNo,jdbcType=VARCHAR},
+      TRANS_TYPE = #{record.transType,jdbcType=VARCHAR},
+      PNR_DEV_ID = #{record.pnrDevId,jdbcType=VARCHAR},
+      POS_DEV_ID = #{record.posDevId,jdbcType=VARCHAR},
+      GATE_ID = #{record.gateId,jdbcType=VARCHAR},
+      POS_MER_ID = #{record.posMerId,jdbcType=VARCHAR},
+      POS_TERM_ID = #{record.posTermId,jdbcType=VARCHAR},
+      ORD_AMT = #{record.ordAmt,jdbcType=VARCHAR},
+      REF_AMT = #{record.refAmt,jdbcType=VARCHAR},
+      FEE_AMT = #{record.feeAmt,jdbcType=VARCHAR},
+      SYS_TIME = #{record.sysTime,jdbcType=VARCHAR},
+      ACCT_DATE = #{record.acctDate,jdbcType=VARCHAR},
+      SYS_SEQ_ID = #{record.sysSeqId,jdbcType=VARCHAR},
+      POS_SEQ_ID = #{record.posSeqId,jdbcType=VARCHAR},
+      RESP_CD = #{record.respCd,jdbcType=VARCHAR},
+      REF_NUM = #{record.refNum,jdbcType=VARCHAR},
+      AUTH_CODE = #{record.authCode,jdbcType=VARCHAR},
+      BATCH_ID = #{record.batchId,jdbcType=VARCHAR},
+      CUST_ID = #{record.custId,jdbcType=VARCHAR},
+      MER_USR_ID = #{record.merUsrId,jdbcType=VARCHAR},
+      MER_ORD_ID = #{record.merOrdId,jdbcType=VARCHAR},
+      REMARK_TYPE = #{record.remarkType,jdbcType=VARCHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR},
+      TRANS_STAT = #{record.transStat,jdbcType=VARCHAR},
+      BANK_STAT = #{record.bankStat,jdbcType=VARCHAR},
+      CHK_FLAG = #{record.chkFlag,jdbcType=VARCHAR},
+      PROC_DRI = #{record.procDri,jdbcType=VARCHAR},
+      MACHINE_NO = #{record.machineNo,jdbcType=VARCHAR},
+      TERM_FLAG = #{record.termFlag,jdbcType=VARCHAR},
+      CALC_MODE = #{record.calcMode,jdbcType=VARCHAR},
+      POS_SYSTEM = #{record.posSystem,jdbcType=VARCHAR},
+      FIELD22 = #{record.field22,jdbcType=VARCHAR},
+      TRANS_DATE_TIME = #{record.transDateTime,jdbcType=VARCHAR},
+      SYS_TRACE_AUDIT_NUM = #{record.sysTraceAuditNum,jdbcType=VARCHAR},
+      MCHNT_TYPE = #{record.mchntType,jdbcType=VARCHAR},
+      ACQ_INST_ID_CODE = #{record.acqInstIdCode,jdbcType=VARCHAR},
+      FWD_INST_ID_CODE = #{record.fwdInstIdCode,jdbcType=VARCHAR},
+      INST_POS_TERM_ID = #{record.instPosTermId,jdbcType=VARCHAR},
+      INST_POS_MER_ID = #{record.instPosMerId,jdbcType=VARCHAR},
+      SYS_MER_NAME = #{record.sysMerName,jdbcType=VARCHAR},
+      FLD_RESERVED = #{record.fldReserved,jdbcType=VARCHAR},
+      REF_NO = #{record.refNo,jdbcType=VARCHAR},
+      RCV_INST_ID_CODE = #{record.rcvInstIdCode,jdbcType=VARCHAR},
+      TXN_NUM = #{record.txnNum,jdbcType=VARCHAR},
+      TYPE_PROCESS_CODE = #{record.typeProcessCode,jdbcType=VARCHAR},
+      AGENT_ID = #{record.agentId,jdbcType=VARCHAR},
+      CARD_FLAG = #{record.cardFlag,jdbcType=CHAR},
+      PROFIT_AMT = #{record.profitAmt,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  
+  <resultMap id="sumdo" type="com.allcheer.bpos.entity.InstAccountingSummaryDO">
+        <id column="INST_ID" jdbcType="CHAR" property="instId"/>
+        <id column="ACCOUNTING_DATE" jdbcType="CHAR" property="accountingDate"/>
+        <result column="TRANS_SUM_AMT" jdbcType="VARCHAR" property="transSumAmt"/>
+        <result column="TRANS_FEE_SUM_AMT" jdbcType="VARCHAR" property="transFeeSumAmt"/>
+        <result column="TRANS_REF_FEE_AMT" jdbcType="VARCHAR" property="transRefFeeAmt"/>
+        <result column="TRANS_CLEAR_AMT" jdbcType="VARCHAR" property="transClearAmt"/>
+    </resultMap>
+    <select id="rumGroupByInstId" resultMap="sumdo">
+        select acq_inst_id_code as INST_ID,
+        trans_date_time as ACCOUNTING_DATE,
+        sum(fee_amt) as TRANS_FEE_SUM_AMT,
+        sum(ord_amt) as TRANS_SUM_AMT
+        from pnr_ord_log
+        where trans_date_time=#{transdate}
+        <if test="instid !=null and instid !=''">and acq_inst_id_code=#{instid}</if>
+        group by acq_inst_id_code,trans_date_time
+    </select>
+
+
+    <resultMap id="sumdo2" type="com.allcheer.bpos.entity.InstProfitSummaryDO">
+        <id column="AGENT_ID" jdbcType="VARCHAR" property="agentId"/>
+        <id column="TRANS_DATE" jdbcType="CHAR" property="transDate"/>
+        <id column="TRANS_TYPE" jdbcType="VARCHAR" property="transType"/>
+        <result column="TRANS_SUM" jdbcType="VARCHAR" property="transSumAmt"/>
+        <result column="MER_TRANS_FEE" jdbcType="VARCHAR" property="transFeeSumAmt"/>
+        <result column="REF_AMT" jdbcType="VARCHAR" property="refAmt"/>
+    </resultMap>
+    <select id="rumGroupByAgentId" resultMap="sumdo2">
+    select agent_id as AGENT_ID,
+    acct_date as TRANS_DATE,
+    card_flag as TRANS_TYPE,
+    sum(ORD_AMT) as TRANS_SUM,
+    sum(to_char(FEE_AMT,'fm9999990.00'))as MER_TRANS_FEE,
+    sum(REF_AMT) as REF_AMT
+    from pnr_ord_log
+    WHERE  agent_id=#{agentId}
+    AND ACCT_DATE=#{acctDate}
+    AND TRANS_STAT=#{transStat}
+    GROUP BY agent_id,acct_date,card_flag
+  </select>
+
+
+    <resultMap id="sumdo3" type="com.allcheer.bpos.entity.InstProfitSummaryDO">
+        <id column="INST_ID" jdbcType="VARCHAR" property="instId"/>
+        <id column="TRANS_DATE" jdbcType="CHAR" property="transDate"/>
+        <id column="TRANS_TYPE" jdbcType="VARCHAR" property="transType"/>
+        <result column="TRANS_SUM" jdbcType="VARCHAR" property="transSumAmt"/>
+        <result column="MER_TRANS_FEE" jdbcType="VARCHAR" property="transFeeSumAmt"/>
+        <result column="REF_AMT" jdbcType="VARCHAR" property="refAmt"/>
+    </resultMap>
+    <select id="rumGroupByInstInstId" resultMap="sumdo3">
+    select acq_inst_id_code as INST_ID,
+    acct_date as TRANS_DATE,
+    card_flag as TRANS_TYPE,
+    sum(ORD_AMT) as TRANS_SUM,
+    sum(trim(to_char(FEE_AMT,'99999999990.99'))) as MER_TRANS_FEE,
+    sum(REF_AMT) as REF_AMT
+    from pnr_ord_log
+    WHERE  acq_inst_id_code=#{instId}
+    AND ACCT_DATE=#{acctDate}
+    AND TRANS_STAT=#{transStat}
+    GROUP BY acq_inst_id_code,acct_date,card_flag
+  </select>
+
+    <select id="selectInstByFeeAmmtAndAccoDateAndGageIdAndTransStat" resultType="java.lang.Integer">
+  select count(*) from pnr_ord_log
+  WHERE   TRANS_STAT='S'
+  and (card_flag ='' or card_flag is null )
+  and gate_id='U2'
+  AND TRANS_STAT='S'
+  and ACCT_DATE=#{acctDate}
+  </select>
+
+    <update id="saveTransLog" parameterType="com.allcheer.bpos.entity.TblBtsTransLogDO">
+       update pnr_ord_log set REF_AMT=#{refAmt} where ORD_ID=#{ordId}
+    </update>
+
+
+    <resultMap id="instProfit" type="com.allcheer.bpos.entity.InstProfitDO">
+        <id column="CNT" jdbcType="VARCHAR" property="cnt"/>
+        <id column="CARD_FLAG" jdbcType="VARCHAR" property="cardFlag"/>
+        <id column="ORD_AMT_SUM" jdbcType="VARCHAR" property="ordAmtSum"/>
+        <id column="FEE_AMT_SUM" jdbcType="VARCHAR" property="feeAmtSum"/>
+        <id column="REF_AMT_SUM" jdbcType="VARCHAR" property="refAmtSum"/>
+    </resultMap>
+
+    <select id="rumGroupCardFlagByInstInstId" resultMap="instProfit">
+
+          select
+            SUM(CNT) as CNT,
+            CARD_FLAG as CARD_FLAG,
+            SUM(ORD_AMT) as ORD_AMT_SUM,
+            SUM(FEE_AMT) as FEE_AMT_SUM,
+            SUM(REF_AMT) as REF_AMT_SUM
+          from
+            (  select
+                    COUNT(*) as CNT,
+                    (CASE WHEN To_number(CARD_FLAG)='' or To_number(CARD_FLAG) is null THEN 2 ELSE To_number(CARD_FLAG) END) as CARD_FLAG,
+                    sum(ORD_AMT) as ORD_AMT,
+                    sum(FEE_AMT) as FEE_AMT,
+                    sum(REF_AMT) as REF_AMT
+                from
+                    PNR_ORD_LOG
+                 WHERE  ACQ_INST_ID_CODE=#{instId}
+                  AND ACCT_DATE&gt;=#{statDate}  and ACCT_DATE &lt;=#{endDate}
+                  AND TRANS_STAT='S'
+                  GROUP BY CARD_FLAG
+              ) mm
+          GROUP BY CARD_FLAG
+    </select>
+
+
+    <resultMap id="channelReport" type="com.allcheer.bpos.entity.InstProfitDO">
+        <id column="GATE" jdbcType="VARCHAR" property="gateId"/>
+        <id column="CNT" jdbcType="VARCHAR" property="cnt"/>
+        <id column="CARD_FLAG" jdbcType="VARCHAR" property="cardFlag"/>
+        <id column="ORD_AMT_SUM" jdbcType="VARCHAR" property="ordAmtSum"/>
+        <id column="FEE_AMT_SUM" jdbcType="VARCHAR" property="feeAmtSum"/>
+        <id column="REF_AMT_SUM" jdbcType="VARCHAR" property="refAmtSum"/>
+    </resultMap>
+    <select id="rumGroupChannelReport" resultMap="channelReport">
+
+        select
+        gate_id as GATE,
+        card_flag as CARD_FLAG,
+        sum(cnt) as CNT,
+        sum(ref_amt) as REF_AMT_SUM,
+        sum(ord_amt) as ORD_AMT_SUM,
+        sum(fee_amt) as FEE_AMT_SUM
+        from
+        (
+        select
+        ACQ_INST_ID_CODE as inst_id,
+        count(*) cnt,
+        (CASE WHEN To_number(card_flag)='' or To_number(card_flag) is null THEN 2 ELSE To_number(card_flag) END) as card_flag,
+        gate_id,
+        sum(ref_amt) as ref_amt,
+        sum(ord_amt) as ord_amt,
+        sum(fee_amt) as fee_amt
+        from PNR_ORD_LOG
+        where 1=1
+         AND ACCT_DATE  &gt;=#{statDate}  and ACCT_DATE  &lt;=#{endDate}
+        and gate_id in('U1','U2')
+         AND TRANS_STAT='S'
+        group by gate_id,card_flag,ACQ_INST_ID_CODE
+        ) mm
+        group by gate_id,card_flag
+
+    </select>
+
+
+
+
+  <!--手动提现-->
+  <resultMap id="localTx" type="com.allcheer.bpos.entity.vo.LocalTxEntity">
+    <result column="ORD_ID" jdbcType="VARCHAR" property="ord_id"/>
+    <result column="MACHINE_NO" jdbcType="VARCHAR" property="machine_no"/>
+    <result column="ACQ_INST_ID_CODE" jdbcType="VARCHAR" property="acq_inst_id_code"/>
+    <result column="INST_MER_TERM_ID" jdbcType="VARCHAR" property="inst_mer_term_id"/>
+  </resultMap>
+  <select id="localSingleTx" resultMap="localTx">
+    SELECT
+    T.ORD_ID,
+    T.MACHINE_NO,
+    T.ACQ_INST_ID_CODE,
+    M.INST_MER_TERM_ID
+    FROM
+    (
+    SELECT
+    MACHINE_NO,
+    ACQ_INST_ID_CODE,
+    ORD_ID
+    FROM
+    pnr_ord_log
+    WHERE
+    acct_date = #{merDate}
+    AND trans_stat = 'S'
+    AND gate_id = 'U4'
+    AND ORD_ID=#{ord_id}
+    ) T
+    LEFT JOIN TBL_INST_ROUTE_CONTROL M ON T.MACHINE_NO = M.INST_MER_ID
+
+  </select>
+
+
+</mapper>

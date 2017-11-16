@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.allcheer.bpos.mapper.GateBankCheckLogMapper">
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.GateBankCheckLog">
+    <result column="GATE_ID" jdbcType="CHAR" property="gateId" />
+    <result column="BANK_CHECK_DATE" jdbcType="CHAR" property="bankCheckDate" />
+    <result column="BANK_CHECK_RESULT" jdbcType="CHAR" property="bankCheckResult" />
+    <result column="BANK_CHECK_TIMES" jdbcType="VARCHAR" property="bankCheckTimes" />
+    <result column="LAST_BANK_CHECK_TIME" jdbcType="CHAR" property="lastBankCheckTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    GATE_ID, BANK_CHECK_DATE, BANK_CHECK_RESULT, BANK_CHECK_TIMES, LAST_BANK_CHECK_TIME
+  </sql>
+  <select id="selectByExample" parameterType="com.allcheer.bpos.entity.GateBankCheckLogExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from GATE_BANK_CHECK_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.GateBankCheckLogExample">
+    delete from GATE_BANK_CHECK_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.GateBankCheckLog">
+    insert into GATE_BANK_CHECK_LOG (GATE_ID, BANK_CHECK_DATE, BANK_CHECK_RESULT, 
+      BANK_CHECK_TIMES, LAST_BANK_CHECK_TIME)
+    values (#{gateId,jdbcType=CHAR}, #{bankCheckDate,jdbcType=CHAR}, #{bankCheckResult,jdbcType=CHAR}, 
+      #{bankCheckTimes,jdbcType=VARCHAR}, #{lastBankCheckTime,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.GateBankCheckLog">
+    insert into GATE_BANK_CHECK_LOG
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="gateId != null">
+        GATE_ID,
+      </if>
+      <if test="bankCheckDate != null">
+        BANK_CHECK_DATE,
+      </if>
+      <if test="bankCheckResult != null">
+        BANK_CHECK_RESULT,
+      </if>
+      <if test="bankCheckTimes != null">
+        BANK_CHECK_TIMES,
+      </if>
+      <if test="lastBankCheckTime != null">
+        LAST_BANK_CHECK_TIME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="gateId != null">
+        #{gateId,jdbcType=CHAR},
+      </if>
+      <if test="bankCheckDate != null">
+        #{bankCheckDate,jdbcType=CHAR},
+      </if>
+      <if test="bankCheckResult != null">
+        #{bankCheckResult,jdbcType=CHAR},
+      </if>
+      <if test="bankCheckTimes != null">
+        #{bankCheckTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="lastBankCheckTime != null">
+        #{lastBankCheckTime,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.GateBankCheckLogExample" resultType="java.lang.Integer">
+    select count(*) from GATE_BANK_CHECK_LOG
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update GATE_BANK_CHECK_LOG
+    <set>
+      <if test="record.gateId != null">
+        GATE_ID = #{record.gateId,jdbcType=CHAR},
+      </if>
+      <if test="record.bankCheckDate != null">
+        BANK_CHECK_DATE = #{record.bankCheckDate,jdbcType=CHAR},
+      </if>
+      <if test="record.bankCheckResult != null">
+        BANK_CHECK_RESULT = #{record.bankCheckResult,jdbcType=CHAR},
+      </if>
+      <if test="record.bankCheckTimes != null">
+        BANK_CHECK_TIMES = #{record.bankCheckTimes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.lastBankCheckTime != null">
+        LAST_BANK_CHECK_TIME = #{record.lastBankCheckTime,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update GATE_BANK_CHECK_LOG
+    set GATE_ID = #{record.gateId,jdbcType=CHAR},
+      BANK_CHECK_DATE = #{record.bankCheckDate,jdbcType=CHAR},
+      BANK_CHECK_RESULT = #{record.bankCheckResult,jdbcType=CHAR},
+      BANK_CHECK_TIMES = #{record.bankCheckTimes,jdbcType=VARCHAR},
+      LAST_BANK_CHECK_TIME = #{record.lastBankCheckTime,jdbcType=CHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

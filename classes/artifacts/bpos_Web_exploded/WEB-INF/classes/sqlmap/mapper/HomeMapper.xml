@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.HomeMapper">
+    <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.vo.TradeAmtVO">
+        <result column="TRADE_DATE" property="tradeDate" jdbcType="VARCHAR"/>
+        <result column="SUM_AMT" property="sumAmt" jdbcType="VARCHAR"/>
+    </resultMap>
+
+
+    <select id="queryPosTradeAmt" resultMap="BaseResultMap">
+        SELECT ACCT_DATE AS TRADE_DATE,
+        SUM(ORD_AMT) AS SUM_AMT FROM
+        PNR_ORD_LOG WHERE TRANS_STAT = 'S'
+        GROUP BY ACCT_DATE
+        HAVING
+        ACCT_DATE = TO_CHAR(SYSDATE,'YYYYMMDD')
+        OR ACCT_DATE = TO_CHAR(SYSDATE-1,'YYYYMMDD')
+        ORDER BY ACCT_DATE
+
+    </select>
+
+    <select id="queryWeChatTradeAmt" resultMap="BaseResultMap">
+        SELECT RETURN_DATE AS TRADE_DATE,
+        SUM(INCOME_AMOUNT) AS SUM_AMT
+         FROM TBL_WECHAT_INCOME
+         WHERE INCOME_STATUS = 'S'  GROUP BY RETURN_DATE HAVING
+        RETURN_DATE = TO_CHAR(SYSDATE,'YYYYMMDD')
+        OR RETURN_DATE = TO_CHAR(SYSDATE-1,'YYYYMMDD')
+        ORDER BY RETURN_DATE
+    </select>
+
+    <select id="queryNoCardTradeAmt" resultMap="BaseResultMap">
+        SELECT RETURN_DATE AS TRADE_DATE,
+        SUM(INCOME_AMOUNT) AS SUM_AMT
+         FROM TBL_WECHAT_INCOME
+         WHERE INCOME_STATUS = 'S' and INCOME_PLATFORM = 'U5' GROUP BY RETURN_DATE HAVING
+        RETURN_DATE = TO_CHAR(SYSDATE,'YYYYMMDD')
+        OR RETURN_DATE = TO_CHAR(SYSDATE-1,'YYYYMMDD')
+        ORDER BY RETURN_DATE
+    </select>
+
+</mapper>

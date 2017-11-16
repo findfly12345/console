@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblBtsGateMerInfoDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblBtsGateMerInfoDO" >
+    <result column="GATE_ID" property="gateId" jdbcType="CHAR" />
+    <result column="POS_MER_ID" property="posMerId" jdbcType="VARCHAR" />
+    <result column="POS_TERM_ID" property="posTermId" jdbcType="VARCHAR" />
+    <result column="POS_MER_TYPE" property="posMerType" jdbcType="CHAR" />
+    <result column="POS_MER_DESC" property="posMerDesc" jdbcType="VARCHAR" />
+    <result column="POS_MER_STAT" property="posMerStat" jdbcType="CHAR" />
+    <result column="POS_MER_PROV" property="posMerProv" jdbcType="VARCHAR" />
+    <result column="POS_MER_CITY" property="posMerCity" jdbcType="VARCHAR" />
+    <result column="POS_MER_REMARK" property="posMerRemark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    GATE_ID, POS_MER_ID, POS_TERM_ID, POS_MER_TYPE, POS_MER_DESC, POS_MER_STAT, POS_MER_PROV, 
+    POS_MER_CITY, POS_MER_REMARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.TblBtsGateMerInfoDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_GATE_MER_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblBtsGateMerInfoDOExample" >
+    delete from TBL_GATE_MER_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.TblBtsGateMerInfoDO" >
+    insert into TBL_GATE_MER_INFO (GATE_ID, POS_MER_ID, POS_TERM_ID, 
+      POS_MER_TYPE, POS_MER_DESC, POS_MER_STAT, 
+      POS_MER_PROV, POS_MER_CITY, POS_MER_REMARK
+      )
+    values (#{gateId,jdbcType=CHAR}, #{posMerId,jdbcType=VARCHAR}, #{posTermId,jdbcType=VARCHAR}, 
+      #{posMerType,jdbcType=CHAR}, #{posMerDesc,jdbcType=VARCHAR}, #{posMerStat,jdbcType=CHAR}, 
+      #{posMerProv,jdbcType=VARCHAR}, #{posMerCity,jdbcType=VARCHAR}, #{posMerRemark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblBtsGateMerInfoDO" >
+    insert into TBL_GATE_MER_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gateId != null" >
+        GATE_ID,
+      </if>
+      <if test="posMerId != null" >
+        POS_MER_ID,
+      </if>
+      <if test="posTermId != null" >
+        POS_TERM_ID,
+      </if>
+      <if test="posMerType != null" >
+        POS_MER_TYPE,
+      </if>
+      <if test="posMerDesc != null" >
+        POS_MER_DESC,
+      </if>
+      <if test="posMerStat != null" >
+        POS_MER_STAT,
+      </if>
+      <if test="posMerProv != null" >
+        POS_MER_PROV,
+      </if>
+      <if test="posMerCity != null" >
+        POS_MER_CITY,
+      </if>
+      <if test="posMerRemark != null" >
+        POS_MER_REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gateId != null" >
+        #{gateId,jdbcType=CHAR},
+      </if>
+      <if test="posMerId != null" >
+        #{posMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="posTermId != null" >
+        #{posTermId,jdbcType=VARCHAR},
+      </if>
+      <if test="posMerType != null" >
+        #{posMerType,jdbcType=CHAR},
+      </if>
+      <if test="posMerDesc != null" >
+        #{posMerDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="posMerStat != null" >
+        #{posMerStat,jdbcType=CHAR},
+      </if>
+      <if test="posMerProv != null" >
+        #{posMerProv,jdbcType=VARCHAR},
+      </if>
+      <if test="posMerCity != null" >
+        #{posMerCity,jdbcType=VARCHAR},
+      </if>
+      <if test="posMerRemark != null" >
+        #{posMerRemark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.TblBtsGateMerInfoDOExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_GATE_MER_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_GATE_MER_INFO
+    <set >
+      <if test="record.gateId != null" >
+        GATE_ID = #{record.gateId,jdbcType=CHAR},
+      </if>
+      <if test="record.posMerId != null" >
+        POS_MER_ID = #{record.posMerId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posTermId != null" >
+        POS_TERM_ID = #{record.posTermId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posMerType != null" >
+        POS_MER_TYPE = #{record.posMerType,jdbcType=CHAR},
+      </if>
+      <if test="record.posMerDesc != null" >
+        POS_MER_DESC = #{record.posMerDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posMerStat != null" >
+        POS_MER_STAT = #{record.posMerStat,jdbcType=CHAR},
+      </if>
+      <if test="record.posMerProv != null" >
+        POS_MER_PROV = #{record.posMerProv,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posMerCity != null" >
+        POS_MER_CITY = #{record.posMerCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.posMerRemark != null" >
+        POS_MER_REMARK = #{record.posMerRemark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_GATE_MER_INFO
+    set GATE_ID = #{record.gateId,jdbcType=CHAR},
+      POS_MER_ID = #{record.posMerId,jdbcType=VARCHAR},
+      POS_TERM_ID = #{record.posTermId,jdbcType=VARCHAR},
+      POS_MER_TYPE = #{record.posMerType,jdbcType=CHAR},
+      POS_MER_DESC = #{record.posMerDesc,jdbcType=VARCHAR},
+      POS_MER_STAT = #{record.posMerStat,jdbcType=CHAR},
+      POS_MER_PROV = #{record.posMerProv,jdbcType=VARCHAR},
+      POS_MER_CITY = #{record.posMerCity,jdbcType=VARCHAR},
+      POS_MER_REMARK = #{record.posMerRemark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

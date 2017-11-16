@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblInstKeyInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblInstKeyInfo" >
+    <result column="INST_CODE" property="instCode" jdbcType="VARCHAR" />
+    <result column="INST_MAIN_KEY" property="instMainKey" jdbcType="VARCHAR" />
+    <result column="INST_PIN_KEY" property="instPinKey" jdbcType="VARCHAR" />
+    <result column="INST_MAC_KEY" property="instMacKey" jdbcType="VARCHAR" />
+    <result column="INST_TD_KEY" property="instTdKey" jdbcType="VARCHAR" />
+    <result column="LOGIN_STAT" property="loginStat" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    LPAD (INST_CODE , 8 , '0') as INST_CODE, INST_MAIN_KEY, INST_PIN_KEY, INST_MAC_KEY, INST_TD_KEY, LOGIN_STAT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.TblInstKeyInfoExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_INST_KEY_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblInstKeyInfoExample" >
+    delete from TBL_INST_KEY_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.TblInstKeyInfo" >
+    insert into TBL_INST_KEY_INFO (INST_CODE, INST_MAIN_KEY, INST_PIN_KEY, 
+      INST_MAC_KEY, INST_TD_KEY, LOGIN_STAT
+      )
+    values (#{instCode,jdbcType=VARCHAR}, #{instMainKey,jdbcType=VARCHAR}, #{instPinKey,jdbcType=VARCHAR}, 
+      #{instMacKey,jdbcType=VARCHAR}, #{instTdKey,jdbcType=VARCHAR}, #{loginStat,jdbcType=CHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblInstKeyInfo" >
+    insert into TBL_INST_KEY_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="instCode != null" >
+        INST_CODE,
+      </if>
+      <if test="instMainKey != null" >
+        INST_MAIN_KEY,
+      </if>
+      <if test="instPinKey != null" >
+        INST_PIN_KEY,
+      </if>
+      <if test="instMacKey != null" >
+        INST_MAC_KEY,
+      </if>
+      <if test="instTdKey != null" >
+        INST_TD_KEY,
+      </if>
+      <if test="loginStat != null" >
+        LOGIN_STAT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="instCode != null" >
+        #{instCode,jdbcType=VARCHAR},
+      </if>
+      <if test="instMainKey != null" >
+        #{instMainKey,jdbcType=VARCHAR},
+      </if>
+      <if test="instPinKey != null" >
+        #{instPinKey,jdbcType=VARCHAR},
+      </if>
+      <if test="instMacKey != null" >
+        #{instMacKey,jdbcType=VARCHAR},
+      </if>
+      <if test="instTdKey != null" >
+        #{instTdKey,jdbcType=VARCHAR},
+      </if>
+      <if test="loginStat != null" >
+        #{loginStat,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.TblInstKeyInfoExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_INST_KEY_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_INST_KEY_INFO
+    <set >
+      <if test="record.instCode != null" >
+        INST_CODE = #{record.instCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instMainKey != null" >
+        INST_MAIN_KEY = #{record.instMainKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instPinKey != null" >
+        INST_PIN_KEY = #{record.instPinKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instMacKey != null" >
+        INST_MAC_KEY = #{record.instMacKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instTdKey != null" >
+        INST_TD_KEY = #{record.instTdKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.loginStat != null" >
+        LOGIN_STAT = #{record.loginStat,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_INST_KEY_INFO
+    set INST_CODE = #{record.instCode,jdbcType=VARCHAR},
+      INST_MAIN_KEY = #{record.instMainKey,jdbcType=VARCHAR},
+      INST_PIN_KEY = #{record.instPinKey,jdbcType=VARCHAR},
+      INST_MAC_KEY = #{record.instMacKey,jdbcType=VARCHAR},
+      INST_TD_KEY = #{record.instTdKey,jdbcType=VARCHAR},
+      LOGIN_STAT = #{record.loginStat,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

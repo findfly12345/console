@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblBtsMerKeyInfoDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblBtsMerKeyInfoDO" >
+    <result column="INST_ID" property="instId" jdbcType="CHAR" />
+    <result column="INST_MER_ID" property="instMerId" jdbcType="CHAR" />
+    <result column="INST_MER_TERM_ID" property="instMerTermId" jdbcType="VARCHAR" />
+    <result column="PRIMARY_KEY" property="primaryKey" jdbcType="VARCHAR" />
+    <result column="PIN_KEY" property="pinKey" jdbcType="VARCHAR" />
+    <result column="MAC_KEY" property="macKey" jdbcType="VARCHAR" />
+    <result column="TD_KEY" property="tdKey" jdbcType="VARCHAR" />
+    <result column="CHECK_STATUS" property="checkStatus" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    INST_ID, INST_MER_ID, INST_MER_TERM_ID, PRIMARY_KEY, PIN_KEY, MAC_KEY, TD_KEY, CHECK_STATUS
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.TblBtsMerKeyInfoDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_INST_MER_KEY_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblBtsMerKeyInfoDOExample" >
+    delete from TBL_INST_MER_KEY_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.TblBtsMerKeyInfoDO" >
+    insert into TBL_INST_MER_KEY_INFO (INST_ID, INST_MER_ID, INST_MER_TERM_ID, 
+      PRIMARY_KEY, PIN_KEY, MAC_KEY, 
+      TD_KEY, CHECK_STATUS)
+    values (#{instId,jdbcType=CHAR}, #{instMerId,jdbcType=CHAR}, #{instMerTermId,jdbcType=VARCHAR}, 
+      #{primaryKey,jdbcType=VARCHAR}, #{pinKey,jdbcType=VARCHAR}, #{macKey,jdbcType=VARCHAR}, 
+      #{tdKey,jdbcType=VARCHAR}, #{checkStatus,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblBtsMerKeyInfoDO" >
+    insert into TBL_INST_MER_KEY_INFO
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="instId != null" >
+        INST_ID,
+      </if>
+      <if test="instMerId != null" >
+        INST_MER_ID,
+      </if>
+      <if test="instMerTermId != null" >
+        INST_MER_TERM_ID,
+      </if>
+      <if test="primaryKey != null" >
+        PRIMARY_KEY,
+      </if>
+      <if test="pinKey != null" >
+        PIN_KEY,
+      </if>
+      <if test="macKey != null" >
+        MAC_KEY,
+      </if>
+      <if test="tdKey != null" >
+        TD_KEY,
+      </if>
+      <if test="checkStatus != null" >
+        CHECK_STATUS,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="instId != null" >
+        #{instId,jdbcType=CHAR},
+      </if>
+      <if test="instMerId != null" >
+        #{instMerId,jdbcType=CHAR},
+      </if>
+      <if test="instMerTermId != null" >
+        #{instMerTermId,jdbcType=VARCHAR},
+      </if>
+      <if test="primaryKey != null" >
+        #{primaryKey,jdbcType=VARCHAR},
+      </if>
+      <if test="pinKey != null" >
+        #{pinKey,jdbcType=VARCHAR},
+      </if>
+      <if test="macKey != null" >
+        #{macKey,jdbcType=VARCHAR},
+      </if>
+      <if test="tdKey != null" >
+        #{tdKey,jdbcType=VARCHAR},
+      </if>
+      <if test="checkStatus != null" >
+        #{checkStatus,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.TblBtsMerKeyInfoDOExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_INST_MER_KEY_INFO
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_INST_MER_KEY_INFO
+    <set >
+      <if test="record.instId != null" >
+        INST_ID = #{record.instId,jdbcType=CHAR},
+      </if>
+      <if test="record.instMerId != null" >
+        INST_MER_ID = #{record.instMerId,jdbcType=CHAR},
+      </if>
+      <if test="record.instMerTermId != null" >
+        INST_MER_TERM_ID = #{record.instMerTermId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.primaryKey != null" >
+        PRIMARY_KEY = #{record.primaryKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.pinKey != null" >
+        PIN_KEY = #{record.pinKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.macKey != null" >
+        MAC_KEY = #{record.macKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.tdKey != null" >
+        TD_KEY = #{record.tdKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkStatus != null" >
+        CHECK_STATUS = #{record.checkStatus,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_INST_MER_KEY_INFO
+    set INST_ID = #{record.instId,jdbcType=CHAR},
+      INST_MER_ID = #{record.instMerId,jdbcType=CHAR},
+      INST_MER_TERM_ID = #{record.instMerTermId,jdbcType=VARCHAR},
+      PRIMARY_KEY = #{record.primaryKey,jdbcType=VARCHAR},
+      PIN_KEY = #{record.pinKey,jdbcType=VARCHAR},
+      MAC_KEY = #{record.macKey,jdbcType=VARCHAR},
+      TD_KEY = #{record.tdKey,jdbcType=VARCHAR},
+      CHECK_STATUS = #{record.checkStatus,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

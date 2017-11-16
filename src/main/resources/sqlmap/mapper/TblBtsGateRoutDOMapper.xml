@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblBtsGateRoutDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblBtsGateRoutDO" >
+    <id column="GATE_ID" property="gateId" jdbcType="CHAR" />
+    <result column="LINE_IP" property="lineIp" jdbcType="VARCHAR" />
+    <result column="LINE_PORT" property="linePort" jdbcType="DECIMAL" />
+    <result column="LINE_NAME" property="lineName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    GATE_ID, LINE_IP, LINE_PORT, LINE_NAME
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.TblBtsGateRoutDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_LINE_CFG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_LINE_CFG
+    where GATE_ID = #{gateId,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBL_LINE_CFG
+    where GATE_ID = #{gateId,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblBtsGateRoutDOExample" >
+    delete from TBL_LINE_CFG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.TblBtsGateRoutDO" >
+    insert into TBL_LINE_CFG (GATE_ID, LINE_IP, LINE_PORT, 
+      LINE_NAME)
+    values (#{gateId,jdbcType=CHAR}, #{lineIp,jdbcType=VARCHAR}, #{linePort,jdbcType=DECIMAL}, 
+      #{lineName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblBtsGateRoutDO" >
+    insert into TBL_LINE_CFG
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gateId != null" >
+        GATE_ID,
+      </if>
+      <if test="lineIp != null" >
+        LINE_IP,
+      </if>
+      <if test="linePort != null" >
+        LINE_PORT,
+      </if>
+      <if test="lineName != null" >
+        LINE_NAME,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gateId != null" >
+        #{gateId,jdbcType=CHAR},
+      </if>
+      <if test="lineIp != null" >
+        #{lineIp,jdbcType=VARCHAR},
+      </if>
+      <if test="linePort != null" >
+        #{linePort,jdbcType=DECIMAL},
+      </if>
+      <if test="lineName != null" >
+        #{lineName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.TblBtsGateRoutDOExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_LINE_CFG
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_LINE_CFG
+    <set >
+      <if test="record.gateId != null" >
+        GATE_ID = #{record.gateId,jdbcType=CHAR},
+      </if>
+      <if test="record.lineIp != null" >
+        LINE_IP = #{record.lineIp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linePort != null" >
+        LINE_PORT = #{record.linePort,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lineName != null" >
+        LINE_NAME = #{record.lineName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_LINE_CFG
+    set GATE_ID = #{record.gateId,jdbcType=CHAR},
+      LINE_IP = #{record.lineIp,jdbcType=VARCHAR},
+      LINE_PORT = #{record.linePort,jdbcType=DECIMAL},
+      LINE_NAME = #{record.lineName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.bpos.entity.TblBtsGateRoutDO" >
+    update TBL_LINE_CFG
+    <set >
+      <if test="lineIp != null" >
+        LINE_IP = #{lineIp,jdbcType=VARCHAR},
+      </if>
+      <if test="linePort != null" >
+        LINE_PORT = #{linePort,jdbcType=DECIMAL},
+      </if>
+      <if test="lineName != null" >
+        LINE_NAME = #{lineName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where GATE_ID = #{gateId,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.bpos.entity.TblBtsGateRoutDO" >
+    update TBL_LINE_CFG
+    set LINE_IP = #{lineIp,jdbcType=VARCHAR},
+      LINE_PORT = #{linePort,jdbcType=DECIMAL},
+      LINE_NAME = #{lineName,jdbcType=VARCHAR}
+    where GATE_ID = #{gateId,jdbcType=CHAR}
+  </update>
+</mapper>

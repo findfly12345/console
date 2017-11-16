@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.InstAccountingSummaryDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.InstAccountingSummaryDO" >
+    <id column="INST_ID" property="instId" jdbcType="CHAR" />
+    <id column="ACCOUNTING_DATE" property="accountingDate" jdbcType="CHAR" />
+    <result column="TRANS_SUM_AMT" property="transSumAmt" jdbcType="VARCHAR" />
+    <result column="TRANS_FEE_SUM_AMT" property="transFeeSumAmt" jdbcType="VARCHAR" />
+    <result column="TRANS_REF_FEE_AMT" property="transRefFeeAmt" jdbcType="VARCHAR" />
+    <result column="TRANS_CLEAR_AMT" property="transClearAmt" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    INST_ID, ACCOUNTING_DATE, TRANS_SUM_AMT, TRANS_FEE_SUM_AMT, TRANS_REF_FEE_AMT, TRANS_CLEAR_AMT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.InstAccountingSummaryDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from INST_ACCOUNTING_SUMMARY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.InstAccountingSummaryDOKey" >
+    select 
+    <include refid="Base_Column_List" />
+    from INST_ACCOUNTING_SUMMARY
+    where INST_ID = #{instId,jdbcType=CHAR}
+      and ACCOUNTING_DATE = #{accountingDate,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="com.allcheer.bpos.entity.InstAccountingSummaryDOKey" >
+    delete from INST_ACCOUNTING_SUMMARY
+    where INST_ID = #{instId,jdbcType=CHAR}
+      and ACCOUNTING_DATE = #{accountingDate,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.InstAccountingSummaryDOExample" >
+    delete from INST_ACCOUNTING_SUMMARY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.InstAccountingSummaryDO" >
+    insert into INST_ACCOUNTING_SUMMARY (INST_ID, ACCOUNTING_DATE, TRANS_SUM_AMT, 
+      TRANS_FEE_SUM_AMT, TRANS_REF_FEE_AMT, TRANS_CLEAR_AMT
+      )
+    values (#{instId,jdbcType=CHAR}, #{accountingDate,jdbcType=CHAR}, #{transSumAmt,jdbcType=VARCHAR}, 
+      #{transFeeSumAmt,jdbcType=VARCHAR}, #{transRefFeeAmt,jdbcType=VARCHAR}, #{transClearAmt,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.InstAccountingSummaryDO" >
+    insert into INST_ACCOUNTING_SUMMARY
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="instId != null" >
+        INST_ID,
+      </if>
+      <if test="accountingDate != null" >
+        ACCOUNTING_DATE,
+      </if>
+      <if test="transSumAmt != null" >
+        TRANS_SUM_AMT,
+      </if>
+      <if test="transFeeSumAmt != null" >
+        TRANS_FEE_SUM_AMT,
+      </if>
+      <if test="transRefFeeAmt != null" >
+        TRANS_REF_FEE_AMT,
+      </if>
+      <if test="transClearAmt != null" >
+        TRANS_CLEAR_AMT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="instId != null" >
+        #{instId,jdbcType=CHAR},
+      </if>
+      <if test="accountingDate != null" >
+        #{accountingDate,jdbcType=CHAR},
+      </if>
+      <if test="transSumAmt != null" >
+        #{transSumAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="transFeeSumAmt != null" >
+        #{transFeeSumAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="transRefFeeAmt != null" >
+        #{transRefFeeAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="transClearAmt != null" >
+        #{transClearAmt,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.InstAccountingSummaryDOExample" resultType="java.lang.Integer" >
+    select count(*) from INST_ACCOUNTING_SUMMARY
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update INST_ACCOUNTING_SUMMARY
+    <set >
+      <if test="record.instId != null" >
+        INST_ID = #{record.instId,jdbcType=CHAR},
+      </if>
+      <if test="record.accountingDate != null" >
+        ACCOUNTING_DATE = #{record.accountingDate,jdbcType=CHAR},
+      </if>
+      <if test="record.transSumAmt != null" >
+        TRANS_SUM_AMT = #{record.transSumAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transFeeSumAmt != null" >
+        TRANS_FEE_SUM_AMT = #{record.transFeeSumAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transRefFeeAmt != null" >
+        TRANS_REF_FEE_AMT = #{record.transRefFeeAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="record.transClearAmt != null" >
+        TRANS_CLEAR_AMT = #{record.transClearAmt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update INST_ACCOUNTING_SUMMARY
+    set INST_ID = #{record.instId,jdbcType=CHAR},
+      ACCOUNTING_DATE = #{record.accountingDate,jdbcType=CHAR},
+      TRANS_SUM_AMT = #{record.transSumAmt,jdbcType=VARCHAR},
+      TRANS_FEE_SUM_AMT = #{record.transFeeSumAmt,jdbcType=VARCHAR},
+      TRANS_REF_FEE_AMT = #{record.transRefFeeAmt,jdbcType=VARCHAR},
+      TRANS_CLEAR_AMT = #{record.transClearAmt,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.bpos.entity.InstAccountingSummaryDO" >
+    update INST_ACCOUNTING_SUMMARY
+    <set >
+      <if test="transSumAmt != null" >
+        TRANS_SUM_AMT = #{transSumAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="transFeeSumAmt != null" >
+        TRANS_FEE_SUM_AMT = #{transFeeSumAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="transRefFeeAmt != null" >
+        TRANS_REF_FEE_AMT = #{transRefFeeAmt,jdbcType=VARCHAR},
+      </if>
+      <if test="transClearAmt != null" >
+        TRANS_CLEAR_AMT = #{transClearAmt,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where INST_ID = #{instId,jdbcType=CHAR}
+      and ACCOUNTING_DATE = #{accountingDate,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.bpos.entity.InstAccountingSummaryDO" >
+    update INST_ACCOUNTING_SUMMARY
+    set TRANS_SUM_AMT = #{transSumAmt,jdbcType=VARCHAR},
+      TRANS_FEE_SUM_AMT = #{transFeeSumAmt,jdbcType=VARCHAR},
+      TRANS_REF_FEE_AMT = #{transRefFeeAmt,jdbcType=VARCHAR},
+      TRANS_CLEAR_AMT = #{transClearAmt,jdbcType=VARCHAR}
+    where INST_ID = #{instId,jdbcType=CHAR}
+      and ACCOUNTING_DATE = #{accountingDate,jdbcType=CHAR}
+  </update>
+</mapper>

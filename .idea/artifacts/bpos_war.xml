@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="bpos:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="Bpos.war">
+      <element id="artifact" artifact-name="bpos:war exploded" />
+    </root>
+  </artifact>
+</component>

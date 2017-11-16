@@ -1,0 +1,14 @@
+
+
+2017-04-01
+alter table TBL_MER_INFO add SETTLE_PERIOD varchar2(5); 
+COMMENT ON COLUMN TBL_MER_INFO.SETTLE_PERIOD IS '结算类型';
+
+
+alter table TBL_MER_INFO add REPORT_STAT
+
+
+1> 是不是可以将get_mer_info 更新为 query_inst_mer
+
+
+2> 机构商户查询的tab 需要更换一下,  从商户查询查询变成 - 机构商户查询

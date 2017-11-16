@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<beans xmlns="http://www.springframework.org/schema/beans"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"  
+    xsi:schemaLocation="http://www.springframework.org/schema/beans  
+     http://www.springframework.org/schema/beans/spring-beans.xsd  
+     http://www.springframework.org/schema/context  
+     http://www.springframework.org/schema/context/spring-context.xsd">  
+  
+     <!-- check info -->  
+     <bean id="checkInfoGetterTask"  
+         class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+         <property name="targetObject" ref="checkTask" /><!--要执行的类-->  
+         <property name="targetMethod" value="run" /><!--要执行的方法-->  
+         <property name="concurrent" value="false" /><!-- 控制在周期内执行不完是否等待，false表示等待 -->  
+     </bean>  
+   
+     <bean id="checkInfoGetterTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+         <property name="jobDetail" ref="checkInfoGetterTask" />  
+         <property name="cronExpression" value="${check.interval}" />  
+     </bean>  
+     <!--  sum inst info -->  
+     <bean id="suminstGetterTask"  
+         class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">  
+         <property name="targetObject" ref="suminst" /><!--要执行的类-->  
+         <property name="targetMethod" value="run" /><!--要执行的方法-->  
+         <property name="concurrent" value="false" /><!-- 控制在周期内执行不完是否等待，false表示等待 -->  
+     </bean>  
+   
+     <bean id="suminstGetterTaskTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">  
+         <property name="jobDetail" ref="suminstGetterTask" />  
+         <property name="cronExpression" value="${inst.sum.interval}" />  
+     </bean>  
+     
+   
+     <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">  
+         <property name="triggers">  
+             <list>  
+                 <ref bean="checkInfoGetterTaskTrigger" />  
+                 <ref bean="suminstGetterTaskTrigger" />  
+             </list>  
+         </property>  
+     </bean>  
+ </beans>

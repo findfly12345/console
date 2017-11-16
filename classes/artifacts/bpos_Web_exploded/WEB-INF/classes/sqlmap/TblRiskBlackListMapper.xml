@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblRiskBlackListMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblRiskBlackList" >
+    <result column="PRI_CARD_NO" property="priCardNo" jdbcType="VARCHAR" />
+    <result column="INST_CODE" property="instCode" jdbcType="VARCHAR" />
+    <result column="MERCH_ID" property="merchId" jdbcType="CHAR" />
+    <result column="TERM_CODE" property="termCode" jdbcType="CHAR" />
+    <result column="ERR_RULE" property="errRule" jdbcType="CHAR" />
+    <result column="RISK_FLAG" property="riskFlag" jdbcType="CHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="CHAR" />
+    <result column="CREATE_TIME" property="createTime" jdbcType="CHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    PRI_CARD_NO, INST_CODE, MERCH_ID, TERM_CODE, ERR_RULE, RISK_FLAG, CREATE_DATE, CREATE_TIME, 
+    REMARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.TblRiskBlackListExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_RISK_BLACK_LIST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblRiskBlackListExample" >
+    delete from TBL_RISK_BLACK_LIST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.TblRiskBlackList" >
+    insert into TBL_RISK_BLACK_LIST (PRI_CARD_NO, INST_CODE, MERCH_ID, 
+      TERM_CODE, ERR_RULE, RISK_FLAG, 
+      CREATE_DATE, CREATE_TIME, REMARK
+      )
+    values (#{priCardNo,jdbcType=VARCHAR}, #{instCode,jdbcType=VARCHAR}, #{merchId,jdbcType=CHAR}, 
+      #{termCode,jdbcType=CHAR}, #{errRule,jdbcType=CHAR}, #{riskFlag,jdbcType=CHAR}, 
+      #{createDate,jdbcType=CHAR}, #{createTime,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblRiskBlackList" >
+    insert into TBL_RISK_BLACK_LIST
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="priCardNo != null" >
+        PRI_CARD_NO,
+      </if>
+      <if test="instCode != null" >
+        INST_CODE,
+      </if>
+      <if test="merchId != null" >
+        MERCH_ID,
+      </if>
+      <if test="termCode != null" >
+        TERM_CODE,
+      </if>
+      <if test="errRule != null" >
+        ERR_RULE,
+      </if>
+      <if test="riskFlag != null" >
+        RISK_FLAG,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="createTime != null" >
+        CREATE_TIME,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="priCardNo != null" >
+        #{priCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="instCode != null" >
+        #{instCode,jdbcType=VARCHAR},
+      </if>
+      <if test="merchId != null" >
+        #{merchId,jdbcType=CHAR},
+      </if>
+      <if test="termCode != null" >
+        #{termCode,jdbcType=CHAR},
+      </if>
+      <if test="errRule != null" >
+        #{errRule,jdbcType=CHAR},
+      </if>
+      <if test="riskFlag != null" >
+        #{riskFlag,jdbcType=CHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.TblRiskBlackListExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_RISK_BLACK_LIST
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_RISK_BLACK_LIST
+    <set >
+      <if test="record.priCardNo != null" >
+        PRI_CARD_NO = #{record.priCardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instCode != null" >
+        INST_CODE = #{record.instCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.merchId != null" >
+        MERCH_ID = #{record.merchId,jdbcType=CHAR},
+      </if>
+      <if test="record.termCode != null" >
+        TERM_CODE = #{record.termCode,jdbcType=CHAR},
+      </if>
+      <if test="record.errRule != null" >
+        ERR_RULE = #{record.errRule,jdbcType=CHAR},
+      </if>
+      <if test="record.riskFlag != null" >
+        RISK_FLAG = #{record.riskFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.createDate != null" >
+        CREATE_DATE = #{record.createDate,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_RISK_BLACK_LIST
+    set PRI_CARD_NO = #{record.priCardNo,jdbcType=VARCHAR},
+      INST_CODE = #{record.instCode,jdbcType=VARCHAR},
+      MERCH_ID = #{record.merchId,jdbcType=CHAR},
+      TERM_CODE = #{record.termCode,jdbcType=CHAR},
+      ERR_RULE = #{record.errRule,jdbcType=CHAR},
+      RISK_FLAG = #{record.riskFlag,jdbcType=CHAR},
+      CREATE_DATE = #{record.createDate,jdbcType=CHAR},
+      CREATE_TIME = #{record.createTime,jdbcType=CHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+</mapper>

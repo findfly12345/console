@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblBtsInstRouteDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblBtsInstRouteDO" >
+    <id column="ROUTE_SEQ" property="routeSeq" jdbcType="DECIMAL" />
+    <result column="INST_CODE" property="instCode" jdbcType="VARCHAR" />
+    <result column="INST_MER_ID" property="instMerId" jdbcType="CHAR" />
+    <result column="INST_MER_TERM_ID" property="instMerTermId" jdbcType="VARCHAR" />
+    <result column="GATE_ID" property="gateId" jdbcType="CHAR" />
+    <result column="BANK_TERM_ID" property="bankTermId" jdbcType="CHAR" />
+    <result column="BANK_MER_ID" property="bankMerId" jdbcType="CHAR" />
+    <result column="STAT" property="stat" jdbcType="CHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ROUTE_SEQ, INST_CODE, INST_MER_ID, INST_MER_TERM_ID, GATE_ID, BANK_TERM_ID, BANK_MER_ID, 
+    STAT
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.TblBtsInstRouteDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_INST_ROUTE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_INST_ROUTE
+    where ROUTE_SEQ = #{routeSeq,jdbcType=DECIMAL}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from TBL_INST_ROUTE
+    where ROUTE_SEQ = #{routeSeq,jdbcType=DECIMAL}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblBtsInstRouteDOExample" >
+    delete from TBL_INST_ROUTE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.TblBtsInstRouteDO" >
+    insert into TBL_INST_ROUTE (ROUTE_SEQ, INST_CODE, INST_MER_ID, 
+      INST_MER_TERM_ID, GATE_ID, BANK_TERM_ID, 
+      BANK_MER_ID, STAT)
+    values (#{routeSeq,jdbcType=DECIMAL}, #{instCode,jdbcType=VARCHAR}, #{instMerId,jdbcType=CHAR}, 
+      #{instMerTermId,jdbcType=VARCHAR}, #{gateId,jdbcType=CHAR}, #{bankTermId,jdbcType=CHAR}, 
+      #{bankMerId,jdbcType=CHAR}, #{stat,jdbcType=CHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblBtsInstRouteDO" >
+    insert into TBL_INST_ROUTE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="routeSeq != null" >
+        ROUTE_SEQ,
+      </if>
+      <if test="instCode != null" >
+        INST_CODE,
+      </if>
+      <if test="instMerId != null" >
+        INST_MER_ID,
+      </if>
+      <if test="instMerTermId != null" >
+        INST_MER_TERM_ID,
+      </if>
+      <if test="gateId != null" >
+        GATE_ID,
+      </if>
+      <if test="bankTermId != null" >
+        BANK_TERM_ID,
+      </if>
+      <if test="bankMerId != null" >
+        BANK_MER_ID,
+      </if>
+      <if test="stat != null" >
+        STAT,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="routeSeq != null" >
+        #{routeSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="instCode != null" >
+        #{instCode,jdbcType=VARCHAR},
+      </if>
+      <if test="instMerId != null" >
+        #{instMerId,jdbcType=CHAR},
+      </if>
+      <if test="instMerTermId != null" >
+        #{instMerTermId,jdbcType=VARCHAR},
+      </if>
+      <if test="gateId != null" >
+        #{gateId,jdbcType=CHAR},
+      </if>
+      <if test="bankTermId != null" >
+        #{bankTermId,jdbcType=CHAR},
+      </if>
+      <if test="bankMerId != null" >
+        #{bankMerId,jdbcType=CHAR},
+      </if>
+      <if test="stat != null" >
+        #{stat,jdbcType=CHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.TblBtsInstRouteDOExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_INST_ROUTE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_INST_ROUTE
+    <set >
+      <if test="record.routeSeq != null" >
+        ROUTE_SEQ = #{record.routeSeq,jdbcType=DECIMAL},
+      </if>
+      <if test="record.instCode != null" >
+        INST_CODE = #{record.instCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.instMerId != null" >
+        INST_MER_ID = #{record.instMerId,jdbcType=CHAR},
+      </if>
+      <if test="record.instMerTermId != null" >
+        INST_MER_TERM_ID = #{record.instMerTermId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gateId != null" >
+        GATE_ID = #{record.gateId,jdbcType=CHAR},
+      </if>
+      <if test="record.bankTermId != null" >
+        BANK_TERM_ID = #{record.bankTermId,jdbcType=CHAR},
+      </if>
+      <if test="record.bankMerId != null" >
+        BANK_MER_ID = #{record.bankMerId,jdbcType=CHAR},
+      </if>
+      <if test="record.stat != null" >
+        STAT = #{record.stat,jdbcType=CHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_INST_ROUTE
+    set ROUTE_SEQ = #{record.routeSeq,jdbcType=DECIMAL},
+      INST_CODE = #{record.instCode,jdbcType=VARCHAR},
+      INST_MER_ID = #{record.instMerId,jdbcType=CHAR},
+      INST_MER_TERM_ID = #{record.instMerTermId,jdbcType=VARCHAR},
+      GATE_ID = #{record.gateId,jdbcType=CHAR},
+      BANK_TERM_ID = #{record.bankTermId,jdbcType=CHAR},
+      BANK_MER_ID = #{record.bankMerId,jdbcType=CHAR},
+      STAT = #{record.stat,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.bpos.entity.TblBtsInstRouteDO" >
+    update TBL_INST_ROUTE
+    <set >
+      <if test="instCode != null" >
+        INST_CODE = #{instCode,jdbcType=VARCHAR},
+      </if>
+      <if test="instMerId != null" >
+        INST_MER_ID = #{instMerId,jdbcType=CHAR},
+      </if>
+      <if test="instMerTermId != null" >
+        INST_MER_TERM_ID = #{instMerTermId,jdbcType=VARCHAR},
+      </if>
+      <if test="gateId != null" >
+        GATE_ID = #{gateId,jdbcType=CHAR},
+      </if>
+      <if test="bankTermId != null" >
+        BANK_TERM_ID = #{bankTermId,jdbcType=CHAR},
+      </if>
+      <if test="bankMerId != null" >
+        BANK_MER_ID = #{bankMerId,jdbcType=CHAR},
+      </if>
+      <if test="stat != null" >
+        STAT = #{stat,jdbcType=CHAR},
+      </if>
+    </set>
+    where ROUTE_SEQ = #{routeSeq,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.bpos.entity.TblBtsInstRouteDO" >
+    update TBL_INST_ROUTE
+    set INST_CODE = #{instCode,jdbcType=VARCHAR},
+      INST_MER_ID = #{instMerId,jdbcType=CHAR},
+      INST_MER_TERM_ID = #{instMerTermId,jdbcType=VARCHAR},
+      GATE_ID = #{gateId,jdbcType=CHAR},
+      BANK_TERM_ID = #{bankTermId,jdbcType=CHAR},
+      BANK_MER_ID = #{bankMerId,jdbcType=CHAR},
+      STAT = #{stat,jdbcType=CHAR}
+    where ROUTE_SEQ = #{routeSeq,jdbcType=DECIMAL}
+  </update>
+  
+  <select id="getId" resultType="java.lang.Integer">
+  	select TBL_INST_ROUTE_SEQ.Nextval from dual
+  </select>
+</mapper>

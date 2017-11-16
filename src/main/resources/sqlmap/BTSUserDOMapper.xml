@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.BTSUserDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.dao.BTSUserDO" >
+    <id column="USER_ID" property="userId" jdbcType="DECIMAL" />
+    <result column="USER_CODE" property="userCode" jdbcType="VARCHAR" />
+    <result column="USER_NAME" property="userName" jdbcType="VARCHAR" />
+    <result column="STATUS" property="status" jdbcType="CHAR" />
+    <result column="NOTE" property="note" jdbcType="VARCHAR" />
+    <result column="CREATE_DATE" property="createDate" jdbcType="CHAR" />
+    <result column="CREATE_BY_ID" property="createById" jdbcType="DECIMAL" />
+    <result column="LAST_UPDATE_ID" property="lastUpdateId" jdbcType="DECIMAL" />
+    <result column="LAST_UPDATE_TIME" property="lastUpdateTime" jdbcType="CHAR" />
+    <result column="LOGIN_FAIL_COUNT" property="loginFailCount" jdbcType="DECIMAL" />
+    <result column="FIRST_LOGIN_FAIL_TIME" property="firstLoginFailTime" jdbcType="CHAR" />
+    <result column="PASSWORD" property="password" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    USER_ID, USER_CODE, USER_NAME, STATUS, NOTE, CREATE_DATE, CREATE_BY_ID, LAST_UPDATE_ID, 
+    LAST_UPDATE_TIME, LOGIN_FAIL_COUNT, FIRST_LOGIN_FAIL_TIME, PASSWORD
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.math.BigDecimal" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_BTS_USER
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </select>
+  <select id="selectByUserCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_BTS_USER
+    where USER_CODE = #{userCode,jdbcType=VARCHAR}
+  </select>
+  <select id="selectRolesByUserCode" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select R.ROLE_NAME from TBL_BTS_USER U left join
+		TBL_BTS_USER_ROLE UR on(U.USER_ID = UR.USER_ID) left join 
+		TBL_BTS_ROLE R on(UR.ROLE_ID = R.ROLE_ID)
+		where U.USER_CODE = #{userCode, jdbcType=VARCHAR}
+  </select>
+  <select id="selectFunctionsByUserCode" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select F.FUNCMENU_CODE from TBL_BTS_USER U left join
+		TBL_BTS_USER_ROLE UR on(U.USER_ID = UR.USER_ID) left join 
+		TBL_BTS_ROLE_FUNC RF on(RF.ROLE_ID = UR.ROLE_ID) left join 
+		TBL_BTS_FUNCMENU F on(RF.FUNC_ID = FUNCMENU_ID)
+		where U.USER_CODE = #{userCode, jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.math.BigDecimal" >
+    delete from TBL_BTS_USER
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.dao.BTSUserDO" >
+    insert into TBL_BTS_USER (USER_ID, USER_CODE, USER_NAME, 
+      STATUS, NOTE, CREATE_DATE, 
+      CREATE_BY_ID, LAST_UPDATE_ID, LAST_UPDATE_TIME, 
+      LOGIN_FAIL_COUNT, FIRST_LOGIN_FAIL_TIME, PASSWORD
+      )
+    values (#{userId,jdbcType=DECIMAL}, #{userCode,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{note,jdbcType=VARCHAR}, #{createDate,jdbcType=CHAR}, 
+      #{createById,jdbcType=DECIMAL}, #{lastUpdateId,jdbcType=DECIMAL}, #{lastUpdateTime,jdbcType=CHAR}, 
+      #{loginFailCount,jdbcType=DECIMAL}, #{firstLoginFailTime,jdbcType=CHAR}, #{password,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.dao.BTSUserDO" >
+    insert into TBL_BTS_USER
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        USER_ID,
+      </if>
+      <if test="userCode != null" >
+        USER_CODE,
+      </if>
+      <if test="userName != null" >
+        USER_NAME,
+      </if>
+      <if test="status != null" >
+        STATUS,
+      </if>
+      <if test="note != null" >
+        NOTE,
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE,
+      </if>
+      <if test="createById != null" >
+        CREATE_BY_ID,
+      </if>
+      <if test="lastUpdateId != null" >
+        LAST_UPDATE_ID,
+      </if>
+      <if test="lastUpdateTime != null" >
+        LAST_UPDATE_TIME,
+      </if>
+      <if test="loginFailCount != null" >
+        LOGIN_FAIL_COUNT,
+      </if>
+      <if test="firstLoginFailTime != null" >
+        FIRST_LOGIN_FAIL_TIME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=DECIMAL},
+      </if>
+      <if test="userCode != null" >
+        #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=CHAR},
+      </if>
+      <if test="createById != null" >
+        #{createById,jdbcType=DECIMAL},
+      </if>
+      <if test="lastUpdateId != null" >
+        #{lastUpdateId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastUpdateTime != null" >
+        #{lastUpdateTime,jdbcType=CHAR},
+      </if>
+      <if test="loginFailCount != null" >
+        #{loginFailCount,jdbcType=DECIMAL},
+      </if>
+      <if test="firstLoginFailTime != null" >
+        #{firstLoginFailTime,jdbcType=CHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.bpos.entity.dao.BTSUserDO" >
+    update TBL_BTS_USER
+    <set >
+      <if test="userCode != null" >
+        USER_CODE = #{userCode,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        USER_NAME = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        STATUS = #{status,jdbcType=CHAR},
+      </if>
+      <if test="note != null" >
+        NOTE = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        CREATE_DATE = #{createDate,jdbcType=CHAR},
+      </if>
+      <if test="createById != null" >
+        CREATE_BY_ID = #{createById,jdbcType=DECIMAL},
+      </if>
+      <if test="lastUpdateId != null" >
+        LAST_UPDATE_ID = #{lastUpdateId,jdbcType=DECIMAL},
+      </if>
+      <if test="lastUpdateTime != null" >
+        LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=CHAR},
+      </if>
+      <if test="loginFailCount != null" >
+        LOGIN_FAIL_COUNT = #{loginFailCount,jdbcType=DECIMAL},
+      </if>
+      <if test="firstLoginFailTime != null" >
+        FIRST_LOGIN_FAIL_TIME = #{firstLoginFailTime,jdbcType=CHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.bpos.entity.dao.BTSUserDO" >
+    update TBL_BTS_USER
+    set USER_CODE = #{userCode,jdbcType=VARCHAR},
+      USER_NAME = #{userName,jdbcType=VARCHAR},
+      STATUS = #{status,jdbcType=CHAR},
+      NOTE = #{note,jdbcType=VARCHAR},
+      CREATE_DATE = #{createDate,jdbcType=CHAR},
+      CREATE_BY_ID = #{createById,jdbcType=DECIMAL},
+      LAST_UPDATE_ID = #{lastUpdateId,jdbcType=DECIMAL},
+      LAST_UPDATE_TIME = #{lastUpdateTime,jdbcType=CHAR},
+      LOGIN_FAIL_COUNT = #{loginFailCount,jdbcType=DECIMAL},
+      FIRST_LOGIN_FAIL_TIME = #{firstLoginFailTime,jdbcType=CHAR},
+      PASSWORD = #{password,jdbcType=VARCHAR}
+    where USER_ID = #{userId,jdbcType=DECIMAL}
+  </update>
+</mapper>

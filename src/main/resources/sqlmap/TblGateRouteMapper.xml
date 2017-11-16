@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblGateRouteMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblGateRoute" >
+    <id column="GATE_ID" property="gateId" jdbcType="VARCHAR" />
+    <result column="GATE_TYPE" property="gateType" jdbcType="VARCHAR" />
+    <result column="GATE_DESP" property="gateDesp" jdbcType="VARCHAR" />
+    <result column="GATE_FEE" property="gateFee" jdbcType="VARCHAR" />
+    <result column="GATE_STAT" property="gateStat" jdbcType="CHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    GATE_ID, GATE_TYPE, GATE_DESP, GATE_FEE, GATE_STAT, REMARK
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.TblGateRouteExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_GATE_ROUTE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_GATE_ROUTE
+    where GATE_ID = #{gateId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBL_GATE_ROUTE
+    where GATE_ID = #{gateId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblGateRouteExample" >
+    delete from TBL_GATE_ROUTE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.TblGateRoute" >
+    insert into TBL_GATE_ROUTE (GATE_ID, GATE_TYPE, GATE_DESP, 
+      GATE_FEE, GATE_STAT, REMARK
+      )
+    values (#{gateId,jdbcType=VARCHAR}, #{gateType,jdbcType=VARCHAR}, #{gateDesp,jdbcType=VARCHAR}, 
+      #{gateFee,jdbcType=VARCHAR}, #{gateStat,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblGateRoute" >
+    insert into TBL_GATE_ROUTE
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="gateId != null" >
+        GATE_ID,
+      </if>
+      <if test="gateType != null" >
+        GATE_TYPE,
+      </if>
+      <if test="gateDesp != null" >
+        GATE_DESP,
+      </if>
+      <if test="gateFee != null" >
+        GATE_FEE,
+      </if>
+      <if test="gateStat != null" >
+        GATE_STAT,
+      </if>
+      <if test="remark != null" >
+        REMARK,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="gateId != null" >
+        #{gateId,jdbcType=VARCHAR},
+      </if>
+      <if test="gateType != null" >
+        #{gateType,jdbcType=VARCHAR},
+      </if>
+      <if test="gateDesp != null" >
+        #{gateDesp,jdbcType=VARCHAR},
+      </if>
+      <if test="gateFee != null" >
+        #{gateFee,jdbcType=VARCHAR},
+      </if>
+      <if test="gateStat != null" >
+        #{gateStat,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        #{remark,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.TblGateRouteExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_GATE_ROUTE
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_GATE_ROUTE
+    <set >
+      <if test="record.gateId != null" >
+        GATE_ID = #{record.gateId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gateType != null" >
+        GATE_TYPE = #{record.gateType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gateDesp != null" >
+        GATE_DESP = #{record.gateDesp,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gateFee != null" >
+        GATE_FEE = #{record.gateFee,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gateStat != null" >
+        GATE_STAT = #{record.gateStat,jdbcType=CHAR},
+      </if>
+      <if test="record.remark != null" >
+        REMARK = #{record.remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_GATE_ROUTE
+    set GATE_ID = #{record.gateId,jdbcType=VARCHAR},
+      GATE_TYPE = #{record.gateType,jdbcType=VARCHAR},
+      GATE_DESP = #{record.gateDesp,jdbcType=VARCHAR},
+      GATE_FEE = #{record.gateFee,jdbcType=VARCHAR},
+      GATE_STAT = #{record.gateStat,jdbcType=CHAR},
+      REMARK = #{record.remark,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.bpos.entity.TblGateRoute" >
+    update TBL_GATE_ROUTE
+    <set >
+      <if test="gateType != null" >
+        GATE_TYPE = #{gateType,jdbcType=VARCHAR},
+      </if>
+      <if test="gateDesp != null" >
+        GATE_DESP = #{gateDesp,jdbcType=VARCHAR},
+      </if>
+      <if test="gateFee != null" >
+        GATE_FEE = #{gateFee,jdbcType=VARCHAR},
+      </if>
+      <if test="gateStat != null" >
+        GATE_STAT = #{gateStat,jdbcType=CHAR},
+      </if>
+      <if test="remark != null" >
+        REMARK = #{remark,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where GATE_ID = #{gateId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.bpos.entity.TblGateRoute" >
+    update TBL_GATE_ROUTE
+    set GATE_TYPE = #{gateType,jdbcType=VARCHAR},
+      GATE_DESP = #{gateDesp,jdbcType=VARCHAR},
+      GATE_FEE = #{gateFee,jdbcType=VARCHAR},
+      GATE_STAT = #{gateStat,jdbcType=CHAR},
+      REMARK = #{remark,jdbcType=VARCHAR}
+    where GATE_ID = #{gateId,jdbcType=VARCHAR}
+  </update>
+</mapper>

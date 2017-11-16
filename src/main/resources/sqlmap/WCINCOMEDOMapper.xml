@@ -1,0 +1,731 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.WCINCOMEDOMapper" >
+  <resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.WCINCOMEDO" >
+    <id column="ID" property="id" jdbcType="CHAR" />
+    <result column="INCOME_RECV_DATE" property="incomeRecvDate" jdbcType="CHAR" />
+    <result column="INCOME_RECV_TIME" property="incomeRecvTime" jdbcType="CHAR" />
+    <result column="INCOME_TYPE" property="incomeType" jdbcType="VARCHAR" />
+    <result column="INCOME_PLATFORM" property="incomePlatform" jdbcType="VARCHAR" />
+    <result column="INCOME_AMOUNT" property="incomeAmount" jdbcType="VARCHAR" />
+    <result column="INCOME_ID" property="incomeId" jdbcType="VARCHAR" />
+    <result column="INCOME_ORG_ID" property="incomeOrgId" jdbcType="VARCHAR" />
+    <result column="INCOME_MOBILE" property="incomeMobile" jdbcType="VARCHAR" />
+    <result column="INCOME_STATUS" property="incomeStatus" jdbcType="CHAR" />
+    <result column="INCOME_AUDIT_STATUS" property="incomeAuditStatus" jdbcType="CHAR" />
+    <result column="MEMBER_ID" property="memberId" jdbcType="CHAR" />
+    <result column="INST_ID" property="instId" jdbcType="VARCHAR" />
+    <result column="OUT_MERCHANT_ID" property="outMerchantId" jdbcType="VARCHAR" />
+    <result column="INCOME_SEND_DATE" property="incomeSendDate" jdbcType="CHAR" />
+    <result column="INCOME_SEND_TIME" property="incomeSendTime" jdbcType="CHAR" />
+    <result column="RETURN_CODE" property="returnCode" jdbcType="VARCHAR" />
+    <result column="RETURN_MSG" property="returnMsg" jdbcType="VARCHAR" />
+    <result column="RETURN_SEQ1" property="returnSeq1" jdbcType="VARCHAR" />
+    <result column="RETURN_SEQ2" property="returnSeq2" jdbcType="VARCHAR" />
+    <result column="RETURN_DATE" property="returnDate" jdbcType="CHAR" />
+    <result column="RETURN_TIME" property="returnTime" jdbcType="CHAR" />
+    <result column="RETURN_STATUS" property="returnStatus" jdbcType="CHAR" />
+    <result column="CLEAR_DATE" property="clearDate" jdbcType="CHAR" />
+    <result column="CLEAR_TIME" property="clearTime" jdbcType="CHAR" />
+    <result column="CLEAR_ID" property="clearId" jdbcType="CHAR" />
+    <result column="RESV1" property="resv1" jdbcType="VARCHAR" />
+    <result column="RESV2" property="resv2" jdbcType="VARCHAR" />
+    <result column="RESV3" property="resv3" jdbcType="VARCHAR" />
+    <result column="OUT_ORDER_ID" property="outOrderId" jdbcType="VARCHAR" />
+    <result column="CHECK_FLAG" property="checkFlag" jdbcType="VARCHAR" />
+    <result column="AGENT_ID" property="agentId" jdbcType="VARCHAR" />
+    <result column="CARD_FLAG" property="cardFlag" jdbcType="CHAR" />
+    <result column="TRANS_FEE" property="transFee" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ID, INCOME_RECV_DATE, INCOME_RECV_TIME, INCOME_TYPE, INCOME_PLATFORM, INCOME_AMOUNT, 
+    INCOME_ID, INCOME_ORG_ID, INCOME_MOBILE, INCOME_STATUS, INCOME_AUDIT_STATUS, MEMBER_ID, 
+    INST_ID, OUT_MERCHANT_ID, INCOME_SEND_DATE, INCOME_SEND_TIME, RETURN_CODE, RETURN_MSG, 
+    RETURN_SEQ1, RETURN_SEQ2, RETURN_DATE, RETURN_TIME, RETURN_STATUS, CLEAR_DATE, CLEAR_TIME, 
+    CLEAR_ID, RESV1, RESV2, RESV3, OUT_ORDER_ID, CHECK_FLAG, AGENT_ID, CARD_FLAG, TRANS_FEE
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.WCINCOMEDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from TBL_WECHAT_INCOME
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from TBL_WECHAT_INCOME
+    where ID = #{id,jdbcType=CHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from TBL_WECHAT_INCOME
+    where ID = #{id,jdbcType=CHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.WCINCOMEDOExample" >
+    delete from TBL_WECHAT_INCOME
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.allcheer.bpos.entity.WCINCOMEDO" >
+    insert into TBL_WECHAT_INCOME (ID, INCOME_RECV_DATE, INCOME_RECV_TIME, 
+      INCOME_TYPE, INCOME_PLATFORM, INCOME_AMOUNT, 
+      INCOME_ID, INCOME_ORG_ID, INCOME_MOBILE, 
+      INCOME_STATUS, INCOME_AUDIT_STATUS, MEMBER_ID, 
+      INST_ID, OUT_MERCHANT_ID, INCOME_SEND_DATE, 
+      INCOME_SEND_TIME, RETURN_CODE, RETURN_MSG, 
+      RETURN_SEQ1, RETURN_SEQ2, RETURN_DATE, 
+      RETURN_TIME, RETURN_STATUS, CLEAR_DATE, 
+      CLEAR_TIME, CLEAR_ID, RESV1, 
+      RESV2, RESV3, OUT_ORDER_ID, 
+      CHECK_FLAG, AGENT_ID, CARD_FLAG, 
+      TRANS_FEE)
+    values (#{id,jdbcType=CHAR}, #{incomeRecvDate,jdbcType=CHAR}, #{incomeRecvTime,jdbcType=CHAR}, 
+      #{incomeType,jdbcType=VARCHAR}, #{incomePlatform,jdbcType=VARCHAR}, #{incomeAmount,jdbcType=VARCHAR}, 
+      #{incomeId,jdbcType=VARCHAR}, #{incomeOrgId,jdbcType=VARCHAR}, #{incomeMobile,jdbcType=VARCHAR}, 
+      #{incomeStatus,jdbcType=CHAR}, #{incomeAuditStatus,jdbcType=CHAR}, #{memberId,jdbcType=CHAR}, 
+      #{instId,jdbcType=VARCHAR}, #{outMerchantId,jdbcType=VARCHAR}, #{incomeSendDate,jdbcType=CHAR}, 
+      #{incomeSendTime,jdbcType=CHAR}, #{returnCode,jdbcType=VARCHAR}, #{returnMsg,jdbcType=VARCHAR}, 
+      #{returnSeq1,jdbcType=VARCHAR}, #{returnSeq2,jdbcType=VARCHAR}, #{returnDate,jdbcType=CHAR}, 
+      #{returnTime,jdbcType=CHAR}, #{returnStatus,jdbcType=CHAR}, #{clearDate,jdbcType=CHAR}, 
+      #{clearTime,jdbcType=CHAR}, #{clearId,jdbcType=CHAR}, #{resv1,jdbcType=VARCHAR}, 
+      #{resv2,jdbcType=VARCHAR}, #{resv3,jdbcType=VARCHAR}, #{outOrderId,jdbcType=VARCHAR}, 
+      #{checkFlag,jdbcType=VARCHAR}, #{agentId,jdbcType=VARCHAR}, #{cardFlag,jdbcType=CHAR}, 
+      #{transFee,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.allcheer.bpos.entity.WCINCOMEDO" >
+    insert into TBL_WECHAT_INCOME
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        ID,
+      </if>
+      <if test="incomeRecvDate != null" >
+        INCOME_RECV_DATE,
+      </if>
+      <if test="incomeRecvTime != null" >
+        INCOME_RECV_TIME,
+      </if>
+      <if test="incomeType != null" >
+        INCOME_TYPE,
+      </if>
+      <if test="incomePlatform != null" >
+        INCOME_PLATFORM,
+      </if>
+      <if test="incomeAmount != null" >
+        INCOME_AMOUNT,
+      </if>
+      <if test="incomeId != null" >
+        INCOME_ID,
+      </if>
+      <if test="incomeOrgId != null" >
+        INCOME_ORG_ID,
+      </if>
+      <if test="incomeMobile != null" >
+        INCOME_MOBILE,
+      </if>
+      <if test="incomeStatus != null" >
+        INCOME_STATUS,
+      </if>
+      <if test="incomeAuditStatus != null" >
+        INCOME_AUDIT_STATUS,
+      </if>
+      <if test="memberId != null" >
+        MEMBER_ID,
+      </if>
+      <if test="instId != null" >
+        INST_ID,
+      </if>
+      <if test="outMerchantId != null" >
+        OUT_MERCHANT_ID,
+      </if>
+      <if test="incomeSendDate != null" >
+        INCOME_SEND_DATE,
+      </if>
+      <if test="incomeSendTime != null" >
+        INCOME_SEND_TIME,
+      </if>
+      <if test="returnCode != null" >
+        RETURN_CODE,
+      </if>
+      <if test="returnMsg != null" >
+        RETURN_MSG,
+      </if>
+      <if test="returnSeq1 != null" >
+        RETURN_SEQ1,
+      </if>
+      <if test="returnSeq2 != null" >
+        RETURN_SEQ2,
+      </if>
+      <if test="returnDate != null" >
+        RETURN_DATE,
+      </if>
+      <if test="returnTime != null" >
+        RETURN_TIME,
+      </if>
+      <if test="returnStatus != null" >
+        RETURN_STATUS,
+      </if>
+      <if test="clearDate != null" >
+        CLEAR_DATE,
+      </if>
+      <if test="clearTime != null" >
+        CLEAR_TIME,
+      </if>
+      <if test="clearId != null" >
+        CLEAR_ID,
+      </if>
+      <if test="resv1 != null" >
+        RESV1,
+      </if>
+      <if test="resv2 != null" >
+        RESV2,
+      </if>
+      <if test="resv3 != null" >
+        RESV3,
+      </if>
+      <if test="outOrderId != null" >
+        OUT_ORDER_ID,
+      </if>
+      <if test="checkFlag != null" >
+        CHECK_FLAG,
+      </if>
+      <if test="agentId != null" >
+        AGENT_ID,
+      </if>
+      <if test="cardFlag != null" >
+        CARD_FLAG,
+      </if>
+      <if test="transFee != null" >
+        TRANS_FEE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=CHAR},
+      </if>
+      <if test="incomeRecvDate != null" >
+        #{incomeRecvDate,jdbcType=CHAR},
+      </if>
+      <if test="incomeRecvTime != null" >
+        #{incomeRecvTime,jdbcType=CHAR},
+      </if>
+      <if test="incomeType != null" >
+        #{incomeType,jdbcType=VARCHAR},
+      </if>
+      <if test="incomePlatform != null" >
+        #{incomePlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeAmount != null" >
+        #{incomeAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeId != null" >
+        #{incomeId,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeOrgId != null" >
+        #{incomeOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeMobile != null" >
+        #{incomeMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeStatus != null" >
+        #{incomeStatus,jdbcType=CHAR},
+      </if>
+      <if test="incomeAuditStatus != null" >
+        #{incomeAuditStatus,jdbcType=CHAR},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=CHAR},
+      </if>
+      <if test="instId != null" >
+        #{instId,jdbcType=VARCHAR},
+      </if>
+      <if test="outMerchantId != null" >
+        #{outMerchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeSendDate != null" >
+        #{incomeSendDate,jdbcType=CHAR},
+      </if>
+      <if test="incomeSendTime != null" >
+        #{incomeSendTime,jdbcType=CHAR},
+      </if>
+      <if test="returnCode != null" >
+        #{returnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnMsg != null" >
+        #{returnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="returnSeq1 != null" >
+        #{returnSeq1,jdbcType=VARCHAR},
+      </if>
+      <if test="returnSeq2 != null" >
+        #{returnSeq2,jdbcType=VARCHAR},
+      </if>
+      <if test="returnDate != null" >
+        #{returnDate,jdbcType=CHAR},
+      </if>
+      <if test="returnTime != null" >
+        #{returnTime,jdbcType=CHAR},
+      </if>
+      <if test="returnStatus != null" >
+        #{returnStatus,jdbcType=CHAR},
+      </if>
+      <if test="clearDate != null" >
+        #{clearDate,jdbcType=CHAR},
+      </if>
+      <if test="clearTime != null" >
+        #{clearTime,jdbcType=CHAR},
+      </if>
+      <if test="clearId != null" >
+        #{clearId,jdbcType=CHAR},
+      </if>
+      <if test="resv1 != null" >
+        #{resv1,jdbcType=VARCHAR},
+      </if>
+      <if test="resv2 != null" >
+        #{resv2,jdbcType=VARCHAR},
+      </if>
+      <if test="resv3 != null" >
+        #{resv3,jdbcType=VARCHAR},
+      </if>
+      <if test="outOrderId != null" >
+        #{outOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkFlag != null" >
+        #{checkFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="agentId != null" >
+        #{agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardFlag != null" >
+        #{cardFlag,jdbcType=CHAR},
+      </if>
+      <if test="transFee != null" >
+        #{transFee,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.allcheer.bpos.entity.WCINCOMEDOExample" resultType="java.lang.Integer" >
+    select count(*) from TBL_WECHAT_INCOME
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update TBL_WECHAT_INCOME
+    <set >
+      <if test="record.id != null" >
+        ID = #{record.id,jdbcType=CHAR},
+      </if>
+      <if test="record.incomeRecvDate != null" >
+        INCOME_RECV_DATE = #{record.incomeRecvDate,jdbcType=CHAR},
+      </if>
+      <if test="record.incomeRecvTime != null" >
+        INCOME_RECV_TIME = #{record.incomeRecvTime,jdbcType=CHAR},
+      </if>
+      <if test="record.incomeType != null" >
+        INCOME_TYPE = #{record.incomeType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomePlatform != null" >
+        INCOME_PLATFORM = #{record.incomePlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomeAmount != null" >
+        INCOME_AMOUNT = #{record.incomeAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomeId != null" >
+        INCOME_ID = #{record.incomeId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomeOrgId != null" >
+        INCOME_ORG_ID = #{record.incomeOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomeMobile != null" >
+        INCOME_MOBILE = #{record.incomeMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomeStatus != null" >
+        INCOME_STATUS = #{record.incomeStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.incomeAuditStatus != null" >
+        INCOME_AUDIT_STATUS = #{record.incomeAuditStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.memberId != null" >
+        MEMBER_ID = #{record.memberId,jdbcType=CHAR},
+      </if>
+      <if test="record.instId != null" >
+        INST_ID = #{record.instId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outMerchantId != null" >
+        OUT_MERCHANT_ID = #{record.outMerchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.incomeSendDate != null" >
+        INCOME_SEND_DATE = #{record.incomeSendDate,jdbcType=CHAR},
+      </if>
+      <if test="record.incomeSendTime != null" >
+        INCOME_SEND_TIME = #{record.incomeSendTime,jdbcType=CHAR},
+      </if>
+      <if test="record.returnCode != null" >
+        RETURN_CODE = #{record.returnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnMsg != null" >
+        RETURN_MSG = #{record.returnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnSeq1 != null" >
+        RETURN_SEQ1 = #{record.returnSeq1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnSeq2 != null" >
+        RETURN_SEQ2 = #{record.returnSeq2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.returnDate != null" >
+        RETURN_DATE = #{record.returnDate,jdbcType=CHAR},
+      </if>
+      <if test="record.returnTime != null" >
+        RETURN_TIME = #{record.returnTime,jdbcType=CHAR},
+      </if>
+      <if test="record.returnStatus != null" >
+        RETURN_STATUS = #{record.returnStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.clearDate != null" >
+        CLEAR_DATE = #{record.clearDate,jdbcType=CHAR},
+      </if>
+      <if test="record.clearTime != null" >
+        CLEAR_TIME = #{record.clearTime,jdbcType=CHAR},
+      </if>
+      <if test="record.clearId != null" >
+        CLEAR_ID = #{record.clearId,jdbcType=CHAR},
+      </if>
+      <if test="record.resv1 != null" >
+        RESV1 = #{record.resv1,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resv2 != null" >
+        RESV2 = #{record.resv2,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resv3 != null" >
+        RESV3 = #{record.resv3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.outOrderId != null" >
+        OUT_ORDER_ID = #{record.outOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checkFlag != null" >
+        CHECK_FLAG = #{record.checkFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.agentId != null" >
+        AGENT_ID = #{record.agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardFlag != null" >
+        CARD_FLAG = #{record.cardFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.transFee != null" >
+        TRANS_FEE = #{record.transFee,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update TBL_WECHAT_INCOME
+    set ID = #{record.id,jdbcType=CHAR},
+      INCOME_RECV_DATE = #{record.incomeRecvDate,jdbcType=CHAR},
+      INCOME_RECV_TIME = #{record.incomeRecvTime,jdbcType=CHAR},
+      INCOME_TYPE = #{record.incomeType,jdbcType=VARCHAR},
+      INCOME_PLATFORM = #{record.incomePlatform,jdbcType=VARCHAR},
+      INCOME_AMOUNT = #{record.incomeAmount,jdbcType=VARCHAR},
+      INCOME_ID = #{record.incomeId,jdbcType=VARCHAR},
+      INCOME_ORG_ID = #{record.incomeOrgId,jdbcType=VARCHAR},
+      INCOME_MOBILE = #{record.incomeMobile,jdbcType=VARCHAR},
+      INCOME_STATUS = #{record.incomeStatus,jdbcType=CHAR},
+      INCOME_AUDIT_STATUS = #{record.incomeAuditStatus,jdbcType=CHAR},
+      MEMBER_ID = #{record.memberId,jdbcType=CHAR},
+      INST_ID = #{record.instId,jdbcType=VARCHAR},
+      OUT_MERCHANT_ID = #{record.outMerchantId,jdbcType=VARCHAR},
+      INCOME_SEND_DATE = #{record.incomeSendDate,jdbcType=CHAR},
+      INCOME_SEND_TIME = #{record.incomeSendTime,jdbcType=CHAR},
+      RETURN_CODE = #{record.returnCode,jdbcType=VARCHAR},
+      RETURN_MSG = #{record.returnMsg,jdbcType=VARCHAR},
+      RETURN_SEQ1 = #{record.returnSeq1,jdbcType=VARCHAR},
+      RETURN_SEQ2 = #{record.returnSeq2,jdbcType=VARCHAR},
+      RETURN_DATE = #{record.returnDate,jdbcType=CHAR},
+      RETURN_TIME = #{record.returnTime,jdbcType=CHAR},
+      RETURN_STATUS = #{record.returnStatus,jdbcType=CHAR},
+      CLEAR_DATE = #{record.clearDate,jdbcType=CHAR},
+      CLEAR_TIME = #{record.clearTime,jdbcType=CHAR},
+      CLEAR_ID = #{record.clearId,jdbcType=CHAR},
+      RESV1 = #{record.resv1,jdbcType=VARCHAR},
+      RESV2 = #{record.resv2,jdbcType=VARCHAR},
+      RESV3 = #{record.resv3,jdbcType=VARCHAR},
+      OUT_ORDER_ID = #{record.outOrderId,jdbcType=VARCHAR},
+      CHECK_FLAG = #{record.checkFlag,jdbcType=VARCHAR},
+      AGENT_ID = #{record.agentId,jdbcType=VARCHAR},
+      CARD_FLAG = #{record.cardFlag,jdbcType=CHAR},
+      TRANS_FEE = #{record.transFee,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.allcheer.bpos.entity.WCINCOMEDO" >
+    update TBL_WECHAT_INCOME
+    <set >
+      <if test="incomeRecvDate != null" >
+        INCOME_RECV_DATE = #{incomeRecvDate,jdbcType=CHAR},
+      </if>
+      <if test="incomeRecvTime != null" >
+        INCOME_RECV_TIME = #{incomeRecvTime,jdbcType=CHAR},
+      </if>
+      <if test="incomeType != null" >
+        INCOME_TYPE = #{incomeType,jdbcType=VARCHAR},
+      </if>
+      <if test="incomePlatform != null" >
+        INCOME_PLATFORM = #{incomePlatform,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeAmount != null" >
+        INCOME_AMOUNT = #{incomeAmount,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeId != null" >
+        INCOME_ID = #{incomeId,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeOrgId != null" >
+        INCOME_ORG_ID = #{incomeOrgId,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeMobile != null" >
+        INCOME_MOBILE = #{incomeMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeStatus != null" >
+        INCOME_STATUS = #{incomeStatus,jdbcType=CHAR},
+      </if>
+      <if test="incomeAuditStatus != null" >
+        INCOME_AUDIT_STATUS = #{incomeAuditStatus,jdbcType=CHAR},
+      </if>
+      <if test="memberId != null" >
+        MEMBER_ID = #{memberId,jdbcType=CHAR},
+      </if>
+      <if test="instId != null" >
+        INST_ID = #{instId,jdbcType=VARCHAR},
+      </if>
+      <if test="outMerchantId != null" >
+        OUT_MERCHANT_ID = #{outMerchantId,jdbcType=VARCHAR},
+      </if>
+      <if test="incomeSendDate != null" >
+        INCOME_SEND_DATE = #{incomeSendDate,jdbcType=CHAR},
+      </if>
+      <if test="incomeSendTime != null" >
+        INCOME_SEND_TIME = #{incomeSendTime,jdbcType=CHAR},
+      </if>
+      <if test="returnCode != null" >
+        RETURN_CODE = #{returnCode,jdbcType=VARCHAR},
+      </if>
+      <if test="returnMsg != null" >
+        RETURN_MSG = #{returnMsg,jdbcType=VARCHAR},
+      </if>
+      <if test="returnSeq1 != null" >
+        RETURN_SEQ1 = #{returnSeq1,jdbcType=VARCHAR},
+      </if>
+      <if test="returnSeq2 != null" >
+        RETURN_SEQ2 = #{returnSeq2,jdbcType=VARCHAR},
+      </if>
+      <if test="returnDate != null" >
+        RETURN_DATE = #{returnDate,jdbcType=CHAR},
+      </if>
+      <if test="returnTime != null" >
+        RETURN_TIME = #{returnTime,jdbcType=CHAR},
+      </if>
+      <if test="returnStatus != null" >
+        RETURN_STATUS = #{returnStatus,jdbcType=CHAR},
+      </if>
+      <if test="clearDate != null" >
+        CLEAR_DATE = #{clearDate,jdbcType=CHAR},
+      </if>
+      <if test="clearTime != null" >
+        CLEAR_TIME = #{clearTime,jdbcType=CHAR},
+      </if>
+      <if test="clearId != null" >
+        CLEAR_ID = #{clearId,jdbcType=CHAR},
+      </if>
+      <if test="resv1 != null" >
+        RESV1 = #{resv1,jdbcType=VARCHAR},
+      </if>
+      <if test="resv2 != null" >
+        RESV2 = #{resv2,jdbcType=VARCHAR},
+      </if>
+      <if test="resv3 != null" >
+        RESV3 = #{resv3,jdbcType=VARCHAR},
+      </if>
+      <if test="outOrderId != null" >
+        OUT_ORDER_ID = #{outOrderId,jdbcType=VARCHAR},
+      </if>
+      <if test="checkFlag != null" >
+        CHECK_FLAG = #{checkFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="agentId != null" >
+        AGENT_ID = #{agentId,jdbcType=VARCHAR},
+      </if>
+      <if test="cardFlag != null" >
+        CARD_FLAG = #{cardFlag,jdbcType=CHAR},
+      </if>
+      <if test="transFee != null" >
+        TRANS_FEE = #{transFee,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.allcheer.bpos.entity.WCINCOMEDO" >
+    update TBL_WECHAT_INCOME
+    set INCOME_RECV_DATE = #{incomeRecvDate,jdbcType=CHAR},
+      INCOME_RECV_TIME = #{incomeRecvTime,jdbcType=CHAR},
+      INCOME_TYPE = #{incomeType,jdbcType=VARCHAR},
+      INCOME_PLATFORM = #{incomePlatform,jdbcType=VARCHAR},
+      INCOME_AMOUNT = #{incomeAmount,jdbcType=VARCHAR},
+      INCOME_ID = #{incomeId,jdbcType=VARCHAR},
+      INCOME_ORG_ID = #{incomeOrgId,jdbcType=VARCHAR},
+      INCOME_MOBILE = #{incomeMobile,jdbcType=VARCHAR},
+      INCOME_STATUS = #{incomeStatus,jdbcType=CHAR},
+      INCOME_AUDIT_STATUS = #{incomeAuditStatus,jdbcType=CHAR},
+      MEMBER_ID = #{memberId,jdbcType=CHAR},
+      INST_ID = #{instId,jdbcType=VARCHAR},
+      OUT_MERCHANT_ID = #{outMerchantId,jdbcType=VARCHAR},
+      INCOME_SEND_DATE = #{incomeSendDate,jdbcType=CHAR},
+      INCOME_SEND_TIME = #{incomeSendTime,jdbcType=CHAR},
+      RETURN_CODE = #{returnCode,jdbcType=VARCHAR},
+      RETURN_MSG = #{returnMsg,jdbcType=VARCHAR},
+      RETURN_SEQ1 = #{returnSeq1,jdbcType=VARCHAR},
+      RETURN_SEQ2 = #{returnSeq2,jdbcType=VARCHAR},
+      RETURN_DATE = #{returnDate,jdbcType=CHAR},
+      RETURN_TIME = #{returnTime,jdbcType=CHAR},
+      RETURN_STATUS = #{returnStatus,jdbcType=CHAR},
+      CLEAR_DATE = #{clearDate,jdbcType=CHAR},
+      CLEAR_TIME = #{clearTime,jdbcType=CHAR},
+      CLEAR_ID = #{clearId,jdbcType=CHAR},
+      RESV1 = #{resv1,jdbcType=VARCHAR},
+      RESV2 = #{resv2,jdbcType=VARCHAR},
+      RESV3 = #{resv3,jdbcType=VARCHAR},
+      OUT_ORDER_ID = #{outOrderId,jdbcType=VARCHAR},
+      CHECK_FLAG = #{checkFlag,jdbcType=VARCHAR},
+      AGENT_ID = #{agentId,jdbcType=VARCHAR},
+      CARD_FLAG = #{cardFlag,jdbcType=CHAR},
+      TRANS_FEE = #{transFee,jdbcType=VARCHAR}
+    where ID = #{id,jdbcType=CHAR}
+  </update>
+  
+   <select id="selectByExampleForExport" resultMap="BaseResultMap" parameterType="com.allcheer.bpos.entity.WCINCOMEDOExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    ID, INCOME_RECV_DATE, INCOME_RECV_TIME, INCOME_TYPE,
+    INCOME_PLATFORM, INCOME_AMOUNT,
+    INCOME_ID, INCOME_ORG_ID, INCOME_MOBILE, INCOME_STATUS, INCOME_AUDIT_STATUS, MEMBER_ID,
+    INST_ID, OUT_MERCHANT_ID, INCOME_SEND_DATE, INCOME_SEND_TIME, RETURN_CODE, RETURN_MSG,
+    RETURN_SEQ1, RETURN_SEQ2, RETURN_DATE, RETURN_TIME, RETURN_STATUS, CLEAR_DATE, CLEAR_TIME,
+    CLEAR_ID, RESV1, RESV2, RESV3, OUT_ORDER_ID
+    from TBL_WECHAT_INCOME
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    order by INST_ID
+  </select>
+  
+  <resultMap id="sumdo" type="com.allcheer.bpos.entity.InstProfitSummaryDO">
+		<id column="INST_ID" jdbcType="VARCHAR" property="instId" />
+		<id column="TRANS_DATE" jdbcType="CHAR" property="transDate" />
+		<id column="TRANS_TYPE" jdbcType="VARCHAR" property="transType" />	
+		<result column="TRANS_SUM" jdbcType="VARCHAR" property="transSumAmt" />
+		<result column="MER_TRANS_FEE" jdbcType="VARCHAR" property="transFeeSumAmt" />
+  </resultMap>
+  
+  <select id="rumGroupByInstId" resultMap="sumdo">
+		select inst_id as INST_ID,
+		income_recv_date as TRANS_DATE,
+		income_type as TRANS_TYPE,
+		sum(INCOME_AMOUNT) as TRANS_SUM,
+		sum(TRANS_FEE) as MER_TRANS_FEE
+		from tbl_wechat_income
+		where inst_id=#{instId}
+		and income_recv_date=#{transDate}
+		and income_status=#{incomeStatus}
+		group by inst_id,income_recv_date,income_type
+  </select>
+
+
+  <resultMap id="sumdoAgent" type="com.allcheer.bpos.entity.InstProfitSummaryDO">
+    <id column="AGENT_ID" jdbcType="VARCHAR" property="agentId" />
+    <id column="TRANS_DATE" jdbcType="CHAR" property="transDate" />
+    <id column="TRANS_TYPE" jdbcType="VARCHAR" property="transType" />
+    <result column="TRANS_SUM" jdbcType="VARCHAR" property="transSumAmt" />
+    <result column="MER_TRANS_FEE" jdbcType="VARCHAR" property="transFeeSumAmt" />
+  </resultMap>
+  <select id="rumGroupByAgentId" resultMap="sumdoAgent">
+    select agent_id as AGENT_ID,
+    income_recv_date as TRANS_DATE,
+    income_type as TRANS_TYPE,
+    sum(INCOME_AMOUNT) as TRANS_SUM,
+    sum(TRANS_FEE) as MER_TRANS_FEE
+    from tbl_wechat_income
+    where agent_id=#{agentId}
+    and income_recv_date=#{transDate}
+    and income_status=#{incomeStatus}
+    group by agent_id,income_recv_date,income_type
+  </select>
+  
+</mapper>

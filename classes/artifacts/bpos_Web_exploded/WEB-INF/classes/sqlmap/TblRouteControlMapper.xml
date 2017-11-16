@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.allcheer.bpos.mapper.TblRouteControlMapper">
+	<resultMap id="BaseResultMap" type="com.allcheer.bpos.entity.TblRouteControl">
+		<result column="POS_ROUTE_SEQ" property="posRouteSeq" jdbcType="VARCHAR" />
+		<result column="INST_ID" property="instId" jdbcType="VARCHAR" />
+		<result column="MER_ID" property="merId" jdbcType="VARCHAR" />
+		<result column="TERM_ID" property="termId" jdbcType="VARCHAR" />
+		<result column="DEST_GATE_ID" property="destGateId" jdbcType="VARCHAR" />
+		<result column="DEST_MER_ID" property="destMerId" jdbcType="VARCHAR" />
+		<result column="DEST_TERM_ID" property="destTermId" jdbcType="VARCHAR" />
+		<result column="STAT" property="stat" jdbcType="VARCHAR" />
+		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<result column="ALIPAY_SUB_PID" property="alipaySubPid" jdbcType="VARCHAR" />
+		<result column="AGENT_ID" property="agentId" jdbcType="VARCHAR" />		
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" suffix=")" prefixOverrides="and">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach collection="criterion.value" item="listItem"
+										open="(" close=")" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		POS_ROUTE_SEQ, INST_ID, MER_ID, TERM_ID, DEST_GATE_ID, DEST_MER_ID, DEST_TERM_ID,
+		STAT, REMARK, ALIPAY_SUB_PID, AGENT_ID
+	</sql>
+	<select id="selectByExample" resultMap="BaseResultMap"
+		parameterType="com.allcheer.bpos.entity.TblRouteControlExample">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from TBL_ROUTE_CONTROL
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+	<delete id="deleteByExample" parameterType="com.allcheer.bpos.entity.TblRouteControlExample">
+		delete from TBL_ROUTE_CONTROL
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.allcheer.bpos.entity.TblRouteControl">
+		insert into TBL_ROUTE_CONTROL (POS_ROUTE_SEQ, INST_ID, MER_ID,
+		TERM_ID, DEST_GATE_ID, DEST_MER_ID,
+		DEST_TERM_ID, STAT, REMARK, ALIPAY_SUB_PID, AGENT_ID
+		)
+		values (#{posRouteSeq,jdbcType=VARCHAR}, #{instId,jdbcType=VARCHAR},
+		#{merId,jdbcType=VARCHAR},
+		#{termId,jdbcType=VARCHAR}, #{destGateId,jdbcType=VARCHAR}, #{destMerId,jdbcType=VARCHAR},
+		#{destTermId,jdbcType=VARCHAR}, #{stat,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR}, #{alipaySubPid,jdbcType=VARCHAR}, #{agentId,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.allcheer.bpos.entity.TblRouteControl">
+		insert into TBL_ROUTE_CONTROL
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="posRouteSeq != null">
+				POS_ROUTE_SEQ,
+			</if>
+			<if test="instId != null">
+				INST_ID,
+			</if>
+			<if test="merId != null">
+				MER_ID,
+			</if>
+			<if test="termId != null">
+				TERM_ID,
+			</if>
+			<if test="destGateId != null">
+				DEST_GATE_ID,
+			</if>
+			<if test="destMerId != null">
+				DEST_MER_ID,
+			</if>
+			<if test="destTermId != null">
+				DEST_TERM_ID,
+			</if>
+			<if test="stat != null">
+				STAT,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="alipaySubPid != null">
+				ALIPAY_SUB_PID,
+			</if>
+			<if test="agentID != null">
+				AGENT_ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="posRouteSeq != null">
+				#{posRouteSeq,jdbcType=VARCHAR},
+			</if>
+			<if test="instId != null">
+				#{instId,jdbcType=VARCHAR},
+			</if>
+			<if test="merId != null">
+				#{merId,jdbcType=VARCHAR},
+			</if>
+			<if test="termId != null">
+				#{termId,jdbcType=VARCHAR},
+			</if>
+			<if test="destGateId != null">
+				#{destGateId,jdbcType=VARCHAR},
+			</if>
+			<if test="destMerId != null">
+				#{destMerId,jdbcType=VARCHAR},
+			</if>
+			<if test="destTermId != null">
+				#{destTermId,jdbcType=VARCHAR},
+			</if>
+			<if test="stat != null">
+				#{stat,jdbcType=VARCHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="alipaySubPid != null">
+				#{alipaySubPid,jdbcType=VARCHAR},
+			</if>	
+			<if test="agentId != null">
+				#{agentId,jdbcType=VARCHAR},
+			</if>					
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.allcheer.bpos.entity.TblRouteControlExample"
+		resultType="java.lang.Integer">
+		select count(*) from TBL_ROUTE_CONTROL
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update TBL_ROUTE_CONTROL
+		<set>
+			<if test="record.posRouteSeq != null">
+				POS_ROUTE_SEQ = #{record.posRouteSeq,jdbcType=VARCHAR},
+			</if>
+			<if test="record.instId != null">
+				INST_ID = #{record.instId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.merId != null">
+				MER_ID = #{record.merId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.termId != null">
+				TERM_ID = #{record.termId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.destGateId != null">
+				DEST_GATE_ID = #{record.destGateId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.destMerId != null">
+				DEST_MER_ID = #{record.destMerId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.destTermId != null">
+				DEST_TERM_ID = #{record.destTermId,jdbcType=VARCHAR},
+			</if>
+			<if test="record.stat != null">
+				STAT = #{record.stat,jdbcType=VARCHAR},
+			</if>
+			<if test="record.remark != null">
+				REMARK = #{record.remark,jdbcType=VARCHAR},
+			</if>
+			<if test="record.alipaySubPid != null">
+				REMARK = #{record.alipaySubPid,jdbcType=VARCHAR},
+			</if>
+			<if test="record.agentId != null">
+				REMARK = #{record.agentId,jdbcType=VARCHAR},
+			</if>						
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update TBL_ROUTE_CONTROL
+		set POS_ROUTE_SEQ = #{record.posRouteSeq,jdbcType=VARCHAR},
+		INST_ID = #{record.instId,jdbcType=VARCHAR},
+		MER_ID = #{record.merId,jdbcType=VARCHAR},
+		TERM_ID = #{record.termId,jdbcType=VARCHAR},
+		DEST_GATE_ID = #{record.destGateId,jdbcType=VARCHAR},
+		DEST_MER_ID = #{record.destMerId,jdbcType=VARCHAR},
+		DEST_TERM_ID = #{record.destTermId,jdbcType=VARCHAR},
+		STAT = #{record.stat,jdbcType=VARCHAR},
+		REMARK = #{record.remark,jdbcType=VARCHAR},
+		ALIPAY_SUB_PID = #{record.alipaySubPid,jdbcType=VARCHAR},
+		AGENT_ID = #{record.agentId,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+
+	<select id="countByCust" resultType="java.lang.Integer">
+
+		select
+		count(*)
+		from tbl_route_control
+		WHERE 1=1
+		<if test="instId != null">
+			AND inst_id=#{instId,jdbcType=VARCHAR}
+		</if>
+		<if test="merId != null">
+			AND mer_id=#{merId,jdbcType=VARCHAR}
+		</if>
+		<if test="termId != null">
+			AND term_id=#{termId,jdbcType=VARCHAR}
+		</if>
+	</select>
+
+	<select id="selectByCust" resultMap="BaseResultMap">
+		select *
+		from tbl_route_control
+		WHERE 1=1
+		<if test="instId != null">
+			AND inst_id=#{instId,jdbcType=VARCHAR}
+		</if>
+		<if test="merId != null">
+			AND mer_id=#{merId,jdbcType=VARCHAR}
+		</if>
+		<if test="termId != null">
+			AND term_id=#{termId,jdbcType=VARCHAR}
+		</if>
+	</select>
+</mapper>

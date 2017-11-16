@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" ?>   
+<!DOCTYPE mapper   
+         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.allcheer.bpos.mapper.UserMapper">
+
+	<resultMap type="com.allcheer.bpos.entity.dao.UserDo" id="user">
+		<id property="id" column="id" javaType="java.lang.Long"
+			jdbcType="INTEGER" />
+		<result property="name" column="name" javaType="java.lang.String"
+			jdbcType="VARCHAR" />
+		<result property="passwd" column="passwd" javaType="java.lang.String"
+			jdbcType="VARCHAR" />
+		<result property="createDate" column="create_date" javaType="java.util.Date"
+			jdbcType="DATE" />
+		<result property="lastLoginDate" column="last_login_date"
+			javaType="java.util.Date" jdbcType="DATE" />
+		<result property="locked" column="locked" javaType="java.lang.Character"
+			jdbcType="CHAR" />
+	</resultMap>
+
+	<insert id="addUser" parameterType="com.allcheer.bpos.entity.dao.UserDo">
+		insert into
+		bpos_user(name,passwd,locked) values(#{name},#{passwd},#{locked})
+	</insert>
+
+	<update id="updateUser" parameterType="com.allcheer.bpos.entity.dao.UserDo">
+		update bpos_user
+		<set>
+			<if test="passwd != null">passwd = #{passwd},</if>
+			<if test="lastLoginDate != null">last_login_date = #{lastLoginDate},</if>
+			<if test="locked != null">locked = #{locked},</if>
+		</set>
+		where name = #{name}
+	</update>
+
+	<sql id="userFiled">
+		id
+		,name
+		,passwd
+		,create_date
+		,last_login_date
+		,locked
+	</sql>
+
+	<select id="findUserByName" parameterType="java.lang.String"
+		resultMap="user">
+		select
+		<include refid="userFiled"></include>
+		from bpos_user
+		where name = #{name}
+	</select>
+	<sql id="findUserWhere">
+		<where>
+			<if test="name != '' and name != null">name = #{name}</if>
+			<if test="passwd != '' and passwd != null"> and passwd = #{passwd}</if>
+			<if test="lastLoginDate != '' and lastLoginDate != null"> and last_login_date = #{lastLoginDate}</if>
+			<if test="locked != '' and locked != null"> and locked = #{locked}</if>
+		</where>
+	</sql>
+	
+	<select id="findUser" parameterType="com.allcheer.bpos.entity.dao.UserDo" resultMap="user">
+		 select
+		<include refid="userFiled"></include>
+		from bpos_user
+		<include refid="findUserWhere"></include>
+	</select>
+	<select id="findUserCount" parameterType="com.allcheer.bpos.entity.dao.UserDo" resultType="int">
+		select
+		count(1)
+		from bpos_user
+		<include refid="findUserWhere"></include>
+	</select>
+
+	<select id="findRoles" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select r.name as rolename
+		from bpos_user u left join
+		bpos_user_role ur on(u.id = ur.user_id) left
+		join bpos_role r
+		on(ur.role_id = r.id)
+		where u.name = #{name}
+	</select>
+
+	<select id="findPermissions" parameterType="java.lang.String"
+		resultType="java.lang.String">
+		select a.value as authame
+		from bpos_user u left join
+		bpos_user_role ur on(u.id = ur.user_id) left
+		join bpos_role_auth ra
+		on(ra.role_id = ur.role_id) left join bpos_auth
+		a on(ra.auth_id = a.id)
+		where u.name = #{name}
+	</select>
+
+	<insert id="correlationRoles">
+		insert into
+		bpos_user_role(user_id,role_id)
+		values(#{userId},#{roleId})
+	</insert>
+
+	<delete id="nuCorrelationRoles">
+		delete bpos_user_role where user_id = #{userId} and
+		role_id = #{roleId}
+	</delete>
+
+</mapper> 
